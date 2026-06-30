@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Chrono Archive — Lịch Records</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--glass:rgba(255,255,255,0.18);--glass-mid:rgba(255,255,255,0.26);--glass-strong:rgba(255,255,255,0.36);--border:rgba(255,255,255,0.38);--border-mid:rgba(255,255,255,0.55);--text:rgba(255,255,255,0.96);--text-mid:rgba(255,255,255,0.72);--text-dim:rgba(255,255,255,0.48);--shadow:0 8px 32px rgba(30,50,90,0.18);--shadow-lg:0 16px 48px rgba(30,50,90,0.22);--ts:0 1px 8px rgba(30,50,90,0.35);}
+html,body{height:100%;}body{font-family:"Be Vietnam Pro",sans-serif;min-height:100vh;overflow-x:hidden;background:#B0BFD0;}
+#bgCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;}
+.doodle-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+.doodle{position:absolute;opacity:0;animation:floatDoodle var(--dur,8s) ease-in-out var(--delay,0s) infinite;}
+@keyframes floatDoodle{0%{opacity:0;transform:translateY(0) rotate(0) scale(1)}15%{opacity:.55}50%{opacity:.45;transform:translateY(-18px) rotate(8deg) scale(1.05)}85%{opacity:.55}100%{opacity:0;transform:translateY(0) rotate(0) scale(1)}}
+.app{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:0 2.4rem;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.6rem;margin:1.2rem 0 0;background:var(--glass);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);}
+.nav-links{list-style:none;display:flex;gap:2.2rem;}.nav-links li{position:relative;}
+.nav-links a{font-size:.8rem;font-weight:400;letter-spacing:.05em;color:var(--text-mid);text-decoration:none;transition:color .2s;text-shadow:var(--ts);}
+.nav-links a:hover{color:var(--text);}.nav-links a.active{color:var(--text);font-weight:600;}
+.nav-links li.active-dot::after{content:"";position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:white;box-shadow:0 0 6px rgba(255,255,255,.8);}
+.nav-profile{display:flex;align-items:center;gap:.8rem;}.nav-text{text-align:right;}
+.nav-handle{font-size:.8rem;font-weight:600;color:var(--text);text-shadow:var(--ts);}
+.nav-sub{font-size:.68rem;color:var(--text-mid);margin-top:.1rem;letter-spacing:.05em;text-shadow:var(--ts);}
+.nav-avatar{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:var(--glass-mid);backdrop-filter:blur(10px);border:1.5px solid var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:800;color:white;text-shadow:var(--ts);box-shadow:var(--shadow);}
+.stage{position:relative;min-height:660px;margin-top:1.4rem;}
+.vinyl-wrap{position:absolute;left:-75px;top:-15px;width:430px;height:430px;z-index:3;}
+.vinyl-svg{width:100%;height:100%;animation:vinylSpin 26s linear infinite,vinylGlow 3s ease-in-out infinite;}
+.vinyl-svg.paused{animation-play-state:paused;}
+@keyframes vinylSpin{to{transform:rotate(360deg)}}
+@keyframes vinylGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(160,200,220,.35)) drop-shadow(0 0 25px rgba(160,200,220,.15))}50%{filter:drop-shadow(0 0 20px rgba(160,200,220,.6)) drop-shadow(0 0 50px rgba(160,200,220,.25))}}
+.arc-svg{position:absolute;inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);pointer-events:none;z-index:4;animation:arcPulse 3s ease-in-out infinite;}
+@keyframes arcPulse{0%,100%{opacity:.75}50%{opacity:1}}
+.eq-bars{position:absolute;bottom:30px;right:-10px;display:flex;gap:3px;align-items:flex-end;height:24px;z-index:5;opacity:0;transition:opacity .5s;}.eq-bars.visible{opacity:1;}
+.eq-bar{width:4px;border-radius:2px;background:white;box-shadow:0 0 6px rgba(255,255,255,.6);}
+.eq-bar:nth-child(1){animation:eq1 .9s ease-in-out infinite;height:8px}.eq-bar:nth-child(2){animation:eq2 .7s ease-in-out infinite;height:14px}.eq-bar:nth-child(3){animation:eq3 1.1s ease-in-out infinite;height:10px}.eq-bar:nth-child(4){animation:eq4 .8s ease-in-out infinite;height:18px}.eq-bar:nth-child(5){animation:eq5 1s ease-in-out infinite;height:6px}
+@keyframes eq1{0%,100%{height:8px}50%{height:20px}}@keyframes eq2{0%,100%{height:14px}50%{height:6px}}@keyframes eq3{0%,100%{height:10px}50%{height:22px}}@keyframes eq4{0%,100%{height:18px}50%{height:8px}}@keyframes eq5{0%,100%{height:6px}50%{height:16px}}
+.vinyl-controls{position:absolute;bottom:26px;left:62px;display:flex;gap:.5rem;z-index:5;}
+.ctrl{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--border-mid);background:var(--glass-mid);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .22s;box-shadow:var(--shadow);}
+.ctrl:hover{background:var(--glass-strong);transform:scale(1.08);box-shadow:0 6px 20px rgba(30,50,90,.25),0 0 0 2px rgba(255,255,255,.3);}.ctrl svg{width:12px;height:12px;}
+.now-playing{position:absolute;bottom:20px;left:108px;font-size:.68rem;color:var(--text-mid);text-shadow:var(--ts);opacity:0;transition:opacity .5s;letter-spacing:.05em;}.now-playing.visible{opacity:1;}
+.info-section{position:absolute;left:322px;top:70px;max-width:290px;z-index:3;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:22px;padding:1.6rem 1.5rem;box-shadow:var(--shadow-lg);}
+.rec-num{font-size:2.1rem;font-weight:800;color:var(--text);line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 12px rgba(30,50,90,.3);}
+.rec-by{font-size:.8rem;color:var(--text-mid);font-style:italic;font-weight:300;margin:.3rem 0 1rem;text-shadow:var(--ts);}
+.rec-desc{font-size:.86rem;line-height:1.95;color:var(--text-mid);font-weight:300;text-shadow:var(--ts);}
+.rec-more{display:inline-block;margin-top:.9rem;color:var(--text);font-style:italic;font-size:.8rem;text-decoration:none;cursor:pointer;transition:opacity .2s;text-shadow:var(--ts);font-weight:500;}.rec-more:hover{opacity:.65;}
+.sub-btn{position:absolute;left:322px;top:390px;z-index:3;padding:.85rem 2rem;background:var(--glass-mid);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1.5px solid var(--border-mid);border-radius:100px;color:var(--text);font-family:"Be Vietnam Pro",sans-serif;font-size:.83rem;font-weight:500;cursor:pointer;transition:all .25s;box-shadow:var(--shadow);text-shadow:var(--ts);letter-spacing:.02em;}
+.sub-btn:hover{background:var(--glass-strong);box-shadow:var(--shadow-lg),0 0 0 2px rgba(255,255,255,.3);transform:translateY(-2px);}
+.search-bar{position:absolute;bottom:24px;left:8px;right:380px;z-index:3;display:flex;align-items:center;gap:.9rem;padding:.88rem 1.3rem;background:var(--glass-mid);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1.5px solid var(--border-mid);border-radius:16px;box-shadow:var(--shadow);transition:all .25s;}
+.search-bar:focus-within{background:var(--glass-strong);box-shadow:var(--shadow-lg),0 0 0 2px rgba(255,255,255,.25);}
+.search-ico{flex-shrink:0;opacity:.7;}.search-inp{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:"Be Vietnam Pro",sans-serif;font-size:.87rem;font-weight:300;}
+.search-inp::placeholder{color:var(--text-dim);font-style:italic;}
+.search-x{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:var(--text-mid);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:background .2s;flex-shrink:0;}
+.search-x:hover{background:rgba(255,255,255,.3);color:white;}
+.right-panel{position:absolute;right:0;top:0;width:330px;z-index:3;background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:22px;padding:1.5rem 1.3rem 1.2rem;box-shadow:var(--shadow-lg);}
+.panel-title{font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:.3rem;letter-spacing:-.01em;font-style:italic;text-shadow:0 2px 12px rgba(30,50,90,.3);}
+.week-label{font-size:.7rem;color:var(--text-dim);letter-spacing:.07em;margin-bottom:.85rem;text-shadow:var(--ts);}
+.sched-list{display:flex;flex-direction:column;gap:.45rem;}
+.srow{display:flex;align-items:center;gap:.72rem;padding:.6rem .85rem;border-radius:12px;transition:all .22s;cursor:default;}
+.srow.offline{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);}
+.srow.stream{background:var(--glass-mid);border:1.5px solid var(--border-mid);box-shadow:0 4px 20px rgba(30,50,90,.12),inset 0 0 20px rgba(255,255,255,.06);}
+.srow.stream:hover{background:var(--glass-strong);transform:translateX(3px);box-shadow:0 6px 24px rgba(30,50,90,.16);}
+.day-badge{width:36px;flex-shrink:0;text-align:center;}.day-name{font-size:.65rem;font-weight:700;letter-spacing:.07em;color:var(--text);text-shadow:var(--ts);}
+.day-date{font-size:.58rem;color:var(--text-dim);margin-top:.04rem;text-shadow:var(--ts);}.srow.offline .day-name{color:var(--text-dim);}
+.day-div{width:1px;height:26px;flex-shrink:0;background:rgba(255,255,255,.25);}.srow.offline .day-div{background:rgba(255,255,255,.12);}
+.srow-info{flex:1;}.srow-activity{font-size:.8rem;font-weight:600;color:var(--text);text-shadow:var(--ts);}
+.srow.offline .srow-activity{font-size:.76rem;font-weight:300;color:var(--text-dim);font-style:italic;}
+.srow-sub{font-size:.65rem;color:var(--text-mid);margin-top:.08rem;text-shadow:var(--ts);}
+.time-badge{font-size:.7rem;font-weight:700;color:white;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:.2rem .5rem;flex-shrink:0;text-shadow:none;backdrop-filter:blur(6px);}
+.np-badge{margin-top:1rem;display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;opacity:0;transition:opacity .5s;}.np-badge.visible{opacity:1;}
+.np-bars{display:flex;gap:2px;align-items:flex-end;height:16px;}.np-bar{width:3px;border-radius:2px;background:rgba(255,255,255,.8);}
+.np-bar:nth-child(1){animation:eq1 .9s ease-in-out infinite;}.np-bar:nth-child(2){animation:eq2 .7s ease-in-out infinite;}.np-bar:nth-child(3){animation:eq3 1.1s ease-in-out infinite;}
+.np-text{font-size:.7rem;color:var(--text-mid);font-style:italic;text-shadow:var(--ts);}
+.footer-quote{margin-top:1rem;text-align:right;font-style:italic;font-size:.7rem;line-height:2;color:var(--text-dim);text-shadow:var(--ts);}
+.vol-control{position:absolute;bottom:26px;right:0;width:330px;z-index:3;display:flex;align-items:center;gap:.7rem;padding:.7rem 1rem;background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);}
+.vol-ico{font-size:.85rem;opacity:.75;flex-shrink:0;}
+.vol-slider{flex:1;height:4px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.25);border-radius:2px;outline:none;cursor:pointer;}
+.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:white;box-shadow:0 2px 8px rgba(30,50,90,.3);cursor:pointer;}
+@media(max-width:780px){.stage{min-height:auto;}.vinyl-wrap{position:relative;left:0;top:0;width:280px;height:280px;margin:0 auto 1rem;}.info-section,.sub-btn,.search-bar,.right-panel,.vol-control{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:1rem 0;width:100%;max-width:100%;}}
+</style></head><body>
+<audio id="bgAudio" src="./broken-hopes.mp3" loop preload="auto"></audio>
+<canvas id="bgCanvas"></canvas>
+<div class="doodle-layer" id="doodleLayer"></div>
+<div class="app">
+  <nav><ul class="nav-links">
+    <li><a href="#">home</a></li>
+    <li><a href="#">bài viết</a></li>
+    <li><a href="#">lore</a></li>
+    <li><a href="#">biên niên</a></li>
+    <li class="active-dot"><a href="#" class="active">lịch stream</a></li>
+  </ul>
+  <div class="nav-profile"><div class="nav-text"><div class="nav-handle">@zierune</div><div class="nav-sub">Chrono Archive</div></div><div class="nav-avatar">Z</div></div>
+  </nav>
+  <div class="stage">
+    <div class="vinyl-wrap">
+      <svg class="vinyl-svg" id="vinylDisc" viewBox="0 0 430 430" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="vg" cx="38%" cy="32%" r="66%"><stop offset="0%" stop-color="#2C2C3A"/><stop offset="35%" stop-color="#19192A"/><stop offset="100%" stop-color="#0C0C18"/></radialGradient>
+          <radialGradient id="lg" cx="42%" cy="38%" r="60%"><stop offset="0%" stop-color="#2A2A3E"/><stop offset="100%" stop-color="#181828"/></radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <circle cx="215" cy="215" r="213" fill="url(#vg)"/>
+        <ellipse cx="160" cy="140" rx="100" ry="62" fill="white" opacity="0.025" transform="rotate(-25 160 140)"/>
+        <g id="grooves"></g>
+        <circle cx="215" cy="215" r="68" fill="url(#lg)"/>
+        <circle cx="215" cy="215" r="67" fill="none" stroke="rgba(160,195,215,0.35)" stroke-width="0.9"/>
+        <circle cx="215" cy="215" r="59" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+        <text x="215" y="210" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-size="7" font-weight="700" fill="rgba(180,210,225,0.7)" letter-spacing="3.5">CHRONO</text>
+        <text x="215" y="222" text-anchor="middle" font-family="Be Vietnam Pro,sans-serif" font-size="7" font-weight="700" fill="rgba(180,210,225,0.7)" letter-spacing="3.5">ARCHIVE</text>
+        <circle cx="215" cy="215" r="13" fill="#D4D8E0"/><circle cx="215" cy="215" r="11" fill="#111120"/>
+      </svg>
+      <svg class="arc-svg" viewBox="0 0 446 446" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="223" cy="223" r="218" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="295 1075" stroke-dashoffset="260"/>
+      </svg>
+      <div class="eq-bars" id="eqBars"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
+      <div class="vinyl-controls">
+        <button class="ctrl" id="pauseBtn" onclick="toggleDisc()"><svg viewBox="0 0 12 14" fill="white"><rect x="0" y="0" width="4" height="14" rx="1.2"/><rect x="8" y="0" width="4" height="14" rx="1.2"/></svg></button>
+        <button class="ctrl" id="playBtn" style="display:none" onclick="toggleDisc()"><svg viewBox="0 0 11 14" fill="white"><polygon points="0,0 11,7 0,14"/></svg></button>
+      </div>
+      <div class="now-playing" id="nowPlayingLabel">♪ đang phát</div>
+    </div>
+    <div class="info-section" id="featInfo"></div>
+    <button class="sub-btn">để lại tên trong Archive?</button>
+    <div class="search-bar">
+      <svg class="search-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-inp" type="text" placeholder="tìm kiếm trong Archive.."/>
+      <button class="search-x">×</button>
+    </div>
+    <div class="right-panel">
+      <div class="panel-title">Lịch Records</div>
+      <div class="week-label" id="weekLabel"></div>
+      <div class="sched-list" id="schedList"></div>
+      <div class="np-badge" id="npBadge"><div class="np-bars"><div class="np-bar"></div><div class="np-bar"></div><div class="np-bar"></div></div><div class="np-text">Broken Hopes and Dreams — winky詩</div></div>
+      <div class="footer-quote">ghé qua Chrono Archive.<br>nếu bạn muốn ở lại,<br>đừ ng quên để lại tên.</div>
+    </div>
+    <div class="vol-control"><span class="vol-ico">🎵</span><input class="vol-slider" id="volSlider" type="range" min="0" max="100" value="40"></div>
+  </div>
+</div>
+<script>
+const WEEK_OF="30/6 — 6/7";
+const WEEK_SCHEDULE=[
+  {day:"T.2",date:"30/6",status:"offline",activity:null,time:null,note:null},
+  {day:"T.3",date:"1/7",status:"offline",activity:null,time:null,note:null},
+  {day:"T.4",date:"2/7",status:"offline",activity:null,time:null,note:null},
+  {day:"T.5",date:"3/7",status:"offline",activity:null,time:null,note:null},
+  {day:"T.6",date:"4/7",status:"stream",activity:"Record #2",time:"20:00",note:"chill game + nói chuyện"},
+  {day:"T.7",date:"5/7",status:"offline",activity:null,time:null,note:null},
+  {day:"CN",date:"6/7",status:"offline",activity:null,time:null,note:null},
+];
+const streamDay=WEEK_SCHEDULE.find(d=>d.status==="stream");
+const featured=streamDay?{id:2,date:"thứ Sáu, "+streamDay.date,desc:"Chưa có chủ đề gì to tát —<br>chỉ là một con game nhẹ nhẹ<br>và ngồi nói chuyện với mọi người."}:null;
+(function paintBg(){const cv=document.getElementById("bgCanvas"),ctx=cv.getContext("2d");function paint(){const W=cv.width=window.innerWidth,H=cv.height=window.innerHeight;const base=ctx.createLinearGradient(0,0,W*.7,H);base.addColorStop(0,"#C8D4E4");base.addColorStop(.4,"#B4C3D6");base.addColorStop(1,"#A0B2C8");ctx.fillStyle=base;ctx.fillRect(0,0,W,H);const dk=["rgba(75,95,130,.17)","rgba(85,105,140,.13)","rgba(65,85,120,.2)","rgba(95,115,150,.1)","rgba(55,78,115,.22)"],lt=["rgba(215,228,242,.22)","rgba(200,218,238,.18)"],cd=[{x:.28,y:.22,rx:.26,ry:.2,d:1},{x:.52,y:.4,rx:.22,ry:.25,d:1},{x:.08,y:.58,rx:.3,ry:.22,d:1},{x:.72,y:.52,rx:.2,ry:.18,d:1},{x:.42,y:.7,rx:.24,ry:.2,d:1},{x:.6,y:.18,rx:.18,ry:.14,d:0},{x:.88,y:.35,rx:.22,ry:.16,d:1},{x:.15,y:.3,rx:.2,ry:.16,d:0},{x:.35,y:.85,rx:.28,ry:.18,d:1},{x:.78,y:.78,rx:.18,ry:.22,d:0}];cd.forEach((b,i)=>{ctx.save();ctx.filter="blur("+(Math.random()*10+6)+"px)";const col=(b.d?dk:lt)[i%(b.d?5:2)],cx=b.x*W,cy=b.y*H,rx=b.rx*W,ry=b.ry*H;for(let j=0;j<6;j++){ctx.fillStyle=col;ctx.beginPath();ctx.ellipse(cx+(Math.random()-.5)*rx*.4,cy+(Math.random()-.5)*ry*.4,rx*(.6+Math.random()*.7),ry*(.6+Math.random()*.7),Math.random()*Math.PI,0,Math.PI*2);ctx.fill();}ctx.restore();});ctx.save();ctx.filter="blur(30px)";ctx.fillStyle="rgba(220,232,248,.1)";ctx.beginPath();ctx.ellipse(W*.5,H*.5,W*.7,H*.4,0,0,Math.PI*2);ctx.fill();ctx.restore();}paint();window.addEventListener("resize",paint);})();
+(function(){const layer=document.getElementById("doodleLayer");function mk(vb,w,h,inner){const s=document.createElementNS("http://www.w3.org/2000/svg","svg");s.setAttribute("viewBox",vb);s.setAttribute("width",w);s.setAttribute("height",h);s.innerHTML=inner;return s;}const fns=[sz=>mk("0 0 40 40",sz,sz,"<g fill=\"none\" stroke=\"rgba(255,255,255,.7)\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"20\" cy=\"12\" r=\"5\"/><circle cx=\"28\" cy=\"20\" r=\"5\"/><circle cx=\"20\" cy=\"28\" r=\"5\"/><circle cx=\"12\" cy=\"20\" r=\"5\"/><circle cx=\"20\" cy=\"20\" r=\"4\" stroke=\"rgba(255,255,255,.5)\"/></g>"),sz=>mk("0 0 30 30",sz,sz,"<g stroke=\"rgba(255,255,255,.7)\" stroke-width=\"1.8\" stroke-linecap=\"round\"><line x1=\"15\" y1=\"2\" x2=\"15\" y2=\"28\"/><line x1=\"2\" y1=\"15\" x2=\"28\" y2=\"15\"/><line x1=\"6\" y1=\"6\" x2=\"24\" y2=\"24\" stroke-width=\"1\"/><line x1=\"24\" y1=\"6\" x2=\"6\" y2=\"24\" stroke-width=\"1\"/></g>"),sz=>mk("0 0 50 40",sz*1.3,sz,"<path d=\"M5,20 Q10,5 20,15 Q30,25 40,10 Q45,5 48,15\" fill=\"none\" stroke=\"rgba(255,255,255,.65)\" stroke-width=\"2\" stroke-linecap=\"round\"/>"),sz=>mk("0 0 20 20",sz*.6,sz*.6,"<g stroke=\"rgba(255,255,255,.65)\" stroke-width=\"2\" stroke-linecap=\"round\"><line x1=\"2\" y1=\"2\" x2=\"18\" y2=\"18\"/><line x1=\"18\" y1=\"2\" x2=\"2\" y2=\"18\"/></g>")];for(let i=0;i<18;i++){const w=document.createElement("div");w.className="doodle";const sz=Math.random()*22+14;w.appendChild(fns[Math.floor(Math.random()*4)](sz));w.style.left=Math.random()*95+"vw";w.style.top=Math.random()*90+"vh";w.style.setProperty("--dur",Math.random()*7+6+"s");w.style.setProperty("--delay",Math.random()*8+"s");w.style.transform="rotate("+Math.random()*360+"deg)";layer.appendChild(w);}})();
+(function(){const g=document.getElementById("grooves");for(let r=74;r<=208;r+=2.5){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx","215");c.setAttribute("cy","215");c.setAttribute("r",r);c.setAttribute("fill","none");c.setAttribute("stroke","rgba(255,255,255,"+(r%5<2.5?.052:.022)+")");c.setAttribute("stroke-width","1");g.appendChild(c);}})();
+const bgAudio=document.getElementById("bgAudio");
+bgAudio.volume=document.getElementById("volSlider").value/100;
+document.getElementById("volSlider").addEventListener("input",function(){bgAudio.volume=this.value/100;});
+bgAudio.play().catch(()=>{document.addEventListener("click",()=>{if(!discPaused)bgAudio.play().catch(()=>{});},{once:true});});
+let discPaused=false;
+function toggleDisc(){discPaused=!discPaused;const disc=document.getElementById("vinylDisc"),pauseBtn=document.getElementById("pauseBtn"),playBtn=document.getElementById("playBtn"),eqBars=document.getElementById("eqBars"),npLabel=document.getElementById("nowPlayingLabel"),npBadge=document.getElementById("npBadge");disc.classList.toggle("paused",discPaused);pauseBtn.style.display=discPaused?"none":"flex";playBtn.style.display=discPaused?"flex":"none";if(discPaused){eqBars.classList.remove("visible");npLabel.classList.remove("visible");npBadge.classList.remove("visible");bgAudio.pause();}else{eqBars.classList.add("visible");npLabel.classList.add("visible");npBadge.classList.add("visible");bgAudio.play().catch(()=>{});}}
+setTimeout(()=>{document.getElementById("eqBars").classList.add("visible");document.getElementById("nowPlayingLabel").classList.add("visible");document.getElementById("npBadge").classList.add("visible");},800);
+function renderFeatured(){const el=document.getElementById("featInfo");if(!featured){el.innerHTML="<div class=\"rec-num\" style=\"font-size:1.4rem\">tuần này,</div><div class=\"rec-by\">Archive tạm đóng cửa.</div><div class=\"rec-desc\" style=\"margin-top:.6rem\">Thư viện cần sắp xếp lại một vài kệ sách.</div>";return;}el.innerHTML="<div class=\"rec-num\">Record #"+featured.id+"</div><div class=\"rec-by\">Zi Eer · "+featured.date+"</div><div class=\"rec-desc\">"+featured.desc+"</div><a class=\"rec-more\">đọc thêm..</a>";}
+function renderSchedule(){document.getElementById("weekLabel").textContent="tuần "+WEEK_OF;const list=document.getElementById("schedList");list.innerHTML="";WEEK_SCHEDULE.forEach(d=>{const row=document.createElement("div");row.className="srow "+d.status;row.innerHTML="<div class=\"day-badge\"><div class=\"day-name\">"+d.day+"</div><div class=\"day-date\">"+d.date+"</div></div><div class=\"day-div\"></div><div class=\"srow-info\"><div class=\"srow-activity\">"+(d.status==="stream"?d.activity:"Offline")+"</div>"+(d.note?"<div class=\"srow-sub\">"+d.note+"</div>":"")+"</div>"+(d.status==="stream"&&d.time?"<div class=\"time-badge\">"+d.time+"</div>":"");list.appendChild(row);});}
+document.querySelector(".search-x").addEventListener("click",()=>{document.querySelector(".search-inp").value="";});
+renderFeatured();renderSchedule();
+</script>
+</body></html>
