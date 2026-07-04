@@ -747,7 +747,7 @@
     <div class="info-section" id="featInfo"></div>
 
     <!-- Subscribe -->
-    <button class="sub-btn">để lại tên trong Archive?</button>
+    <button class="sub-btn">để lại tên in Archive?</button>
 
     <!-- Search -->
     <div class="search-bar">
@@ -801,7 +801,7 @@ const WEEK_SCHEDULE = [
   { day:"T.2", date:"7/7",  status:"stream",  activity:"MECCHA CHAMELEON", time:"20:00", note:"indie anime, tắc kô hoa đổi màu" },
   { day:"T.3", date:"8/7",  status:"stream",  activity:"Home Sweet Home",  time:"20:00", note:"horror Thái Lan 👻" },
   { day:"T.4", date:"9/7",  status:"stream",  activity:"Minecraft",        time:"20:00", note:"xây tự do, không lo gì cả" },
-  { day:"T.5", date:"10/7", status:"stream",  activity:"Liar's Bar",      time:"20:00", note:"ai nói thật, ai nói dối?" },
+  { day:"T.5", date:"10/7", status:"stream",  activity:"Liar's Bar",      time:"20:00", note:"ai nói thật, ai nüi dối?" },
   { day:"T.6", date:"11/7", status:"stream",  activity:"Superliminal",    time:"20:00", note:"ảo ảnh không gian" },
   { day:"T.7", date:"12/7", status:"stream",  activity:"Hariti Demo",     time:"20:00", note:"thử demo mới" },
   { day:"CN",  date:"13/7", status:"stream",  activity:"Valorant",        time:"20:00", note:"chill + rank grind" },
@@ -858,9 +858,7 @@ const featured  = streamDay ? {
       { x:.88,y:.35,rx:.22,ry:.16,dark:true  },
       { x:.15,y:.30,rx:.20,ry:.16,dark:false },
       { x:.35,y:.85,rx:.28,ry:.18,dark:true  },
-      { x:.78,y:.78,rx:.18,ry:.15,dark:true  },
-    ];
-y:.22,dark:false },
+      { x:.78,y:.78,rx:.18,r8,ry:.22,dark:false },
     ];
 
     // Enable blur for watercolor bleed
@@ -1057,14 +1055,14 @@ function renderFeatured() {
     el.innerHTML = `
       <div class="rec-num" style="font-size:1.4rem">tuần này,</div>
       <div class="rec-by">Archive tạm đóng cửa.</div>
-      <div class="rec-desc" style="margin-top:.6rem">Thư viện cần sắp xếp lại một vài kệ sách.</div>`;
+      <div class="rec-desc" style="margin-top:.6rem">Thư viện cần sape xếp lại motột vài kệ sách.</div>`;
     return;
   }
   el.innerHTML = `
     <div class="rec-num">Record #${featured.id}</div>
     <div class="rec-by">Zi Eer · ${featured.date}</div>
     <div class="rec-desc">${featured.desc}</div>
-    <a class="rec-more">đọc thêm..</a>`;
+    <a class="rec-more">đọc thêm...</a>`;
 }
 
 /* ════════════════════════
