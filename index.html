@@ -657,7 +657,7 @@
       <li><a href="#">bài viết</a></li>
       <li><a href="#">lore</a></li>
       <li><a href="#">biên niên</a></li>
-      <li class="active-dot"><a href="#" class="active">lệch stream</a></li>
+      <li class="active-dot"><a href="#" class="active">lịch stream</a></li>
     </ul>
     <div class="nav-profile">
       <div class="nav-text">
@@ -798,12 +798,12 @@
 const WEEK_OF = "6/7 — 12/7";
 
 const WEEK_SCHEDULE = [
-  { day:"T.2", date:"6/7",  status:"stream",  activity:"MECCHA CHAMELEON", time:"20:00", note:"indie anime, tắc kô hoa đổi màu" },
-  { day:"T.3", date:"7/7",  status:"stream",  activity:"Home Sweet Home",  time:"20:00", note:"horror Thái Lan 👻" },
-  { day:"T.4", date:"8/7",  status:"stream",  activity:"Minecraft",        time:"20:00", note:"xây tự do, không lo gì cả" },
+  { day:"T.2", date:"6/7",  status:"stream",  activity:"MECCHA CHAMELEON", time:"20:00", note:"indie anime, tắc kÐ hoa đổi màu" },
+  { day:"T.3", date:"7/7",  status:"stream",  activity:"Home Sweet Home",  time:"20:00", note:"horror Thái Lan 🇹🇭" },
+  { day:"T.4", date:"8/7",  status:"stream",  activity:"Minecraft",        time:"20:00", note:"zây tự do, không lo gì cả" },
   { day:"T.5", date:"9/7",  status:"stream",  activity:"Liar's Bar",      time:"20:00", note:"ai nói thật, ai nói dối?" },
   { day:"T.6", date:"10/7", status:"stream",  activity:"Superliminal",    time:"20:00", note:"ảo ảnh không gian" },
-  { day:"T.7", date:"11/7", status:"stream",  activity:"Hariti Demo",     time:"20:00", note:"thử demo mới" },
+  { day:"T.7", date:"11/7", status:"stream",  activity:"Hariti Demo",     time:"20:00", note:"thự demo meới" },
   { day:"CN",  date:"12/7", status:"stream",  activity:"Valorant",        time:"20:00", note:"chill + rank grind" },
 ];
 
@@ -811,7 +811,7 @@ const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
   id: 3,
   date: `thứ Hai, 6/7`,
-  desc: `Tuần full stream —<br>7 ngày, 7 tựa game.<br>Bắt đầu với MECCHA CHAMELEON.`,
+  desc: `Tuần full stream —<br>7 ngày,9 7ựa game.<br>Bắt đầu với MECCHA CHAMELEON.`,
 } : null;
 
 /* ════════════════════════
@@ -1000,21 +1000,14 @@ document.getElementById("volSlider").addEventListener("input", function() {
   bgAudio.volume = this.value / 100;
 });
 
-// Auto-phat ngay khi load, fallback về first click nếu browser chặn
-bgAudio.play().catch(() => {
-  document.addEventListener("click", () => {
-    if (!discPaused) bgAudio.play().catch(() => {});
-  }, { once: true });
-});
-
 /* ════════════════════════
    DISC TOGGLE
 ════════════════════════ */
-let discPaused = false;
+let discPaused = true;
 
-function toggleDisc() {
-  discPaused = !discPaused;
-
+// UI always follows audio state — not the other way around
+function setDiscPlaying(playing) {
+  discPaused = !playing;
   const disc     = document.getElementById("vinylDisc");
   const pauseBtn = document.getElementById("pauseBtn");
   const playBtn  = document.getElementById("playBtn");
@@ -1022,29 +1015,45 @@ function toggleDisc() {
   const npLabel  = document.getElementById("nowPlayingLabel");
   const npBadge  = document.getElementById("npBadge");
 
-  disc.classList.toggle("paused", discPaused);
-  pauseBtn.style.display = discPaused ? "none"  : "flex";
-  playBtn.style.displayy  = discPaused ? "flex"  : "none";
-
-  if (discPaused) {
-    eqBars.classList.remove("visible");
-    npLabel.classList.remove("visible");
-    npBadge.classList.remove("visible");
-    bgAudio.pause();
-  } else {
+  if (playing) {
+    disc.classList.remove("paused");
+    pauseBtn.style.display = "flex";
+    playBtn.style.display  = "none";
     eqBars.classList.add("visible");
     npLabel.classList.add("visible");
     npBadge.classList.add("visible");
-    bgAudio.play().catch(() => {});
+  } else {
+    disc.classList.add("paused");
+    pauseBtn.style.display = "none";
+    playBtn.style.display  = "flex";
+    eqBars.classList.remove("visible");
+    npLabel.classList.remove("visible");
+    npBadge.classList.remove("visible");
   }
 }
 
-// Auto-start after 1s (first interaction already satisfied on page load in most cases)
-setTimeout(() => {
-  document.getElementById("eqBars").classList.add("visible");
-  document.getElementById("nowPlayingLabel").classList.add("visible");
-  document.getElementById("npBadge").classList.add("visible");
-}, 800);
+// Audio events drive the UI
+bgAudio.addEventListener("play",    () => setDiscPlaying(true));
+bgAudio.addEventListener("playing", () => setDiscPlaying(true));
+bgAudio.addEventListener("pause",   () => setDiscPlaying(false));
+bgAudio.addEventListener("ended",   () => setDiscPlaying(false));
+
+// Initialize: disc paused, play button visible
+setDiscPlaying(false);
+
+// Try autoplay — if browser allows it, events above will flip the UI
+bgAudio.play().catch(() => {
+  // Blocked — disc stays paused, user clicks play button
+});
+
+// Toggle: just control audio; events handle disc UI
+function toggleDisc() {
+  if (bgAudio.paused) {
+    bgAudio.play().catch(() => {});
+  } else {
+    bgAudio.pause();
+  }
+}
 
 /* ════════════════════════
    RENDER FEATURED
@@ -1097,15 +1106,4 @@ function renderSchedule() {
    SEARCH CLEAR
 ════════════════════════ */
 document.querySelector(".search-x").addEventListener("click", () => {
-  document.querySelector(".search-inp").value = "";
-});
-
-/* ════════════════════════
-   INIT
-════════════════════════ */
-renderFeatured();
-renderSchedule();
-
- </script>
-</body>
-</html>
+  document.querySelector(".search-inp").value = ""
