@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chrono Archive â€” Lá»‹ch Records</title>
+  <title>Chrono Archive — Lịch Records</title>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,700;0,800;1,300;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,9 +33,9 @@
       background: #B0BFD0;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        BACKGROUND CANVAS
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     #bgCanvas {
       position: fixed;
       inset: 0;
@@ -43,9 +43,9 @@
       z-index: 0;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        DOODLE LAYER
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     .doodle-layer {
       position: fixed;
       inset: 0;
@@ -68,9 +68,9 @@
       100% { opacity: 0;    transform: translateY(0px) rotate(0deg)   scale(1); }
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        APP WRAPPER
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     .app {
       position: relative;
       z-index: 2;
@@ -79,9 +79,9 @@
       padding: 0 2.4rem;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       NAV â€” glass
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* ═══════════════════════
+       NAV — glass
+    ═══════════════════════ */
     nav {
       display: flex;
       align-items: center;
@@ -160,18 +160,18 @@
       box-shadow: var(--shadow);
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        STAGE
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     .stage {
       position: relative;
       min-height: 660px;
       margin-top: 1.4rem;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        VINYL
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     .vinyl-wrap {
       position: absolute;
       left: -75px; top: -15px;
@@ -291,9 +291,9 @@
 
     .now-playing.visible { opacity: 1; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       INFO SECTION â€” glass card
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* ═══════════════════════
+       INFO SECTION — glass card
+    ═══════════════════════ */
     .info-section {
       position: absolute;
       left: 322px; top: 70px;
@@ -349,9 +349,9 @@
 
     .rec-more:hover { opacity: .65; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       SUBSCRIBE BTN â€” glass
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* ═══════════════════════
+       SUBSCRIBE BTN — glass
+    ═══════════════════════ */
     .sub-btn {
       position: absolute;
       left: 322px; top: 390px;
@@ -379,9 +379,9 @@
       transform: translateY(-2px);
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       SEARCH â€” glass
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* ═══════════════════════
+       SEARCH — glass
+    ═══════════════════════ */
     .search-bar {
       position: absolute;
       bottom: 24px; left: 8px; right: 380px;
@@ -426,9 +426,9 @@
 
     .search-x:hover { background: rgba(255,255,255,0.3); color: white; }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       RIGHT PANEL â€” glass
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    /* ═══════════════════════
+       RIGHT PANEL — glass
+    ═══════════════════════ */
     .right-panel {
       position: absolute;
       right: 0; top: 0;
@@ -459,7 +459,7 @@
       text-shadow: var(--ts);
     }
 
-    /* â”€â”€â”€ SCHEDULE ROWS â”€â”€â”€ */
+    /* ─── SCHEDULE ROWS ─── */
     .sched-list { display: flex; flex-direction: column; gap: .45rem; }
 
     .srow {
@@ -547,7 +547,7 @@
       backdrop-filter: blur(6px);
     }
 
-    /* â”€â”€â”€ NOW PLAYING BADGE in right panel â”€â”€â”€ */
+    /* ─── NOW PLAYING BADGE in right panel ─── */
     .np-badge {
       margin-top: 1rem;
       display: flex; align-items: center; gap: .5rem;
@@ -579,7 +579,7 @@
       font-style: italic; text-shadow: var(--ts);
     }
 
-    /* â”€â”€â”€ FOOTER QUOTE â”€â”€â”€ */
+    /* ─── FOOTER QUOTE ─── */
     .footer-quote {
       margin-top: 1rem;
       text-align: right;
@@ -589,9 +589,9 @@
       text-shadow: var(--ts);
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        VOLUME CONTROL
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     .vol-control {
       position: absolute;
       bottom: 26px; right: 0;
@@ -624,9 +624,9 @@
       cursor: pointer;
     }
 
-    /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    /* ═══════════════════════
        RESPONSIVE
-    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+    ═══════════════════════ */
     @media (max-width: 780px) {
       .stage { min-height: auto; }
       .vinyl-wrap { position: relative; left: 0; top: 0; width: 280px; height: 280px; margin: 0 auto 1rem; }
@@ -654,10 +654,10 @@
   <nav>
     <ul class="nav-links">
       <li><a href="#">home</a></li>
-      <li><a href="#">bÃ i viáº¿t</a></li>
+      <li><a href="#">bài viết</a></li>
       <li><a href="#">lore</a></li>
-      <li><a href="#">biÃªn niÃªn</a></li>
-      <li class="active-dot"><a href="#" class="active">lá»‹ch stream</a></li>
+      <li><a href="#">biên niên</a></li>
+      <li class="active-dot"><a href="#" class="active">lệch stream</a></li>
     </ul>
     <div class="nav-profile">
       <div class="nav-text">
@@ -671,7 +671,7 @@
   <!-- STAGE -->
   <div class="stage">
 
-    <!-- â”€â”€ VINYL â”€â”€ -->
+    <!-- ── VINYL ── -->
     <div class="vinyl-wrap">
       <svg class="vinyl-svg" id="vinylDisc" viewBox="0 0 430 430" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -727,27 +727,27 @@
 
       <!-- Controls -->
       <div class="vinyl-controls">
-        <button class="ctrl" id="pauseBtn" onclick="toggleDisc()" title="Táº¡m dá»«ng">
+        <button class="ctrl" id="pauseBtn" onclick="toggleDisc()" title="Tạm dừng">
           <svg viewBox="0 0 12 14" fill="white">
             <rect x="0" y="0" width="4" height="14" rx="1.2"/>
             <rect x="8" y="0" width="4" height="14" rx="1.2"/>
           </svg>
         </button>
-        <button class="ctrl" id="playBtn" style="display:none" onclick="toggleDisc()" title="PhÃ¡t">
+        <button class="ctrl" id="playBtn" style="display:none" onclick="toggleDisc()" title="Phát">
           <svg viewBox="0 0 11 14" fill="white">
             <polygon points="0,0 11,7 0,14"/>
           </svg>
         </button>
       </div>
 
-      <div class="now-playing" id="nowPlayingLabel">â™ª Ä‘ang phÃ¡t</div>
+      <div class="now-playing" id="nowPlayingLabel">♪ đang phát</div>
     </div><!-- /vinyl-wrap -->
 
     <!-- Info card -->
     <div class="info-section" id="featInfo"></div>
 
     <!-- Subscribe -->
-    <button class="sub-btn">Ä‘á»ƒ láº¡i tÃªn trong Archive?</button>
+    <button class="sub-btn">để lại tên Trong Archive?</button>
 
     <!-- Search -->
     <div class="search-bar">
@@ -755,13 +755,13 @@
         fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input class="search-inp" type="text" placeholder="tÃ¬m kiáº¿m trong Archive.."/>
-      <button class="search-x">Ã—</button>
+      <input class="search-inp" type="text" placeholder="tìm kiếm trong Archive.."/>
+      <button class="search-x">×</button>
     </div>
 
     <!-- Right panel -->
     <div class="right-panel">
-      <div class="panel-title">Lá»‹ch Records</div>
+      <div class="panel-title">Lịch Records</div>
       <div class="week-label" id="weekLabel"></div>
       <div class="sched-list" id="schedList"></div>
 
@@ -772,19 +772,19 @@
           <div class="np-bar"></div>
           <div class="np-bar"></div>
         </div>
-        <div class="np-text">Broken Hopes and Dreams â€” winkyè©©</div>
+        <div class="np-text">Broken Hopes and Dreams — winky詩</div>
       </div>
 
       <div class="footer-quote">
-        ghÃ© qua Chrono Archive.<br>
-        náº¿u báº¡n muá»‘n á»Ÿ láº¡i,<br>
-        Ä‘á»«ng quÃªn Ä‘á»ƒ láº¡i tÃªn.
+        ghé qua Chrono Archive.<br>
+        nếu bạn muốn ở lại,<br>
+        đừng quên để lại tên.
       </div>
     </div>
 
     <!-- Volume control -->
     <div class="vol-control">
-      <span class="vol-ico">ðŸŽµ</span>
+      <span class="vol-ico">🎵</span>
       <input class="vol-slider" id="volSlider" type="range" min="0" max="100" value="40">
     </div>
 
@@ -792,31 +792,31 @@
 </div>
 
 <script>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   Cáº¬P NHáº¬T Má»–I TUáº¦N
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-const WEEK_OF = "7/7 â€” 13/7";
+/* ══════════════════════════════════════════════════
+   CẬP NHẬT MỖI TUẦN
+══════════════════════════════════════════════════ */
+const WEEK_OF = "6/7 — 12/7";
 
 const WEEK_SCHEDULE = [
-  { day:"T.2", date:"6/7",  status:"stream",  activity:"MECCHA CHAMELEON", time:"20:00", note:"indie anime, táº¯c kÃ´ hoa Ä‘á»•i mÃ u" },
-  { day:"T.3", date:"7/7",  status:"stream",  activity:"Home Sweet Home",  time:"20:00", note:"horror ThÃ¡i Lan ðŸ‘»" },
-  { day:"T.4", date:"8/7",  status:"stream",  activity:"Minecraft",        time:"20:00", note:"xÃ¶y tá»± do, khÃ´ng lo gÃ¬ cáº£" },
-  { day:"T.5", date:"9/7", status:"stream",  activity:"Liar's Bar",      time:"20:00", note:"ai nÃ³i tháº­t, ai nÃ³i dá»‘i?" },
-  { day:"T.6", date:"10/7", status:"stream",  activity:"Superliminal",    time:"20:00", note:"áº£o áº£nh khÃ´ng gian" },
-  { day:"T.7", date:"11/7", status:"stream",  activity:"Hariti Demo",     time:"20:00", note:"thá»­ demo má»›i" },
+  { day:"T.2", date:"6/7",  status:"stream",  activity:"MECCHA CHAMELEON", time:"20:00", note:"indie anime, tắc kô hoa đổi màu" },
+  { day:"T.3", date:"7/7",  status:"stream",  activity:"Home Sweet Home",  time:"20:00", note:"horror Thái Lan 👻" },
+  { day:"T.4", date:"8/7",  status:"stream",  activity:"Minecraft",        time:"20:00", note:"xây tự do, không lo gì cả" },
+  { day:"T.5", date:"9/7",  status:"stream",  activity:"Liar's Bar",      time:"20:00", note:"ai nói thật, ai nói dối?" },
+  { day:"T.6", date:"10/7", status:"stream",  activity:"Superliminal",    time:"20:00", note:"ảo ảnh không gian" },
+  { day:"T.7", date:"11/7", status:"stream",  activity:"Hariti Demo",     time:"20:00", note:"thử demo mới" },
   { day:"CN",  date:"12/7", status:"stream",  activity:"Valorant",        time:"20:00", note:"chill + rank grind" },
 ];
 
 const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
   id: 3,
-  date: `thá»© Hai, 7/7`,
-  desc: `Tuáº§n full stream â€”<br>7 ngÃ y, 7 tá»±a game.<br>Báº¯t Ä‘áº§u vá»›i MECCHA CHAMELEON.`,
+  date: `thứ Hai, 6/7`,
+  desc: `Tuần full stream —<br>7 ngày, 7 tựa game.<br>Bắt đầu với MECCHA CHAMELEON.`,
 } : null;
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    WATERCOLOR BACKGROUND
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 (function paintBg() {
   const cv = document.getElementById("bgCanvas");
   const ctx = cv.getContext("2d");
@@ -834,7 +834,7 @@ const featured  = streamDay ? {
     ctx.fillStyle = base;
     ctx.fillRect(0, 0, W, H);
 
-    // Cloud patches â€” dark blue blobs
+    // Cloud patches — dark blue blobs
     const darkCloud = [
       "rgba(75, 95, 130, 0.17)",
       "rgba(85,105,140, 0.13)",
@@ -897,9 +897,9 @@ const featured  = streamDay ? {
   window.addEventListener("resize", paint);
 })();
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    FLOATING DOODLES
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 (function spawnDoodles() {
   const layer = document.getElementById("doodleLayer");
 
@@ -973,9 +973,9 @@ const featured  = streamDay ? {
   }
 })();
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    VINYL GROOVES
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 (function() {
   const g = document.getElementById("grooves");
   for (let r = 74; r <= 208; r += 2.5) {
@@ -990,9 +990,9 @@ const featured  = streamDay ? {
   }
 })();
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    AUDIO
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 const bgAudio = document.getElementById("bgAudio");
 bgAudio.volume = document.getElementById("volSlider").value / 100;
 
@@ -1000,16 +1000,16 @@ document.getElementById("volSlider").addEventListener("input", function() {
   bgAudio.volume = this.value / 100;
 });
 
-// Auto-phÃ¡t ngay khi load, fallback vá» first click náº¿u browser cháº·n
+// Auto-phat ngay khi load, fallback về first click nếu browser chặn
 bgAudio.play().catch(() => {
   document.addEventListener("click", () => {
     if (!discPaused) bgAudio.play().catch(() => {});
   }, { once: true });
 });
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    DISC TOGGLE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 let discPaused = false;
 
 function toggleDisc() {
@@ -1024,7 +1024,7 @@ function toggleDisc() {
 
   disc.classList.toggle("paused", discPaused);
   pauseBtn.style.display = discPaused ? "none"  : "flex";
-  playBtn.style.display  = discPaused ? "flex"  : "none";
+  playBtn.style.displayy  = discPaused ? "flex"  : "none";
 
   if (discPaused) {
     eqBars.classList.remove("visible");
@@ -1046,37 +1046,37 @@ setTimeout(() => {
   document.getElementById("npBadge").classList.add("visible");
 }, 800);
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    RENDER FEATURED
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 function renderFeatured() {
   const el = document.getElementById("featInfo");
   if (!featured) {
     el.innerHTML = `
-      <div class="rec-num" style="font-size:1.4rem">tuáº§n nÃ y,</div>
-      <div class="rec-by">Archive táº¡m Ä‘Ã³ng cá»­a.</div>
-      <div class="rec-desc" style="margin-top:.6rem">ThÆ° viá»‡n cáº§n sáº¯p xáº¿p láº¡i má»™t vC i ká»‡ sÃ¡ch.</div>`;
+      <div class="rec-num" style="font-size:1.4rem">tuần này,</div>
+      <div class="rec-by">Archive tạm đóng cửa.</div>
+      <div class="rec-desc" style="margin-top:.6rem">Thư viện cần sắp xếp lại một vài kệ sách.</div>`;
     return;
   }
   el.innerHTML = `
     <div class="rec-num">Record #${featured.id}</div>
-    <div class="rec-by">Zi Eer Â· ${featured.date}</div>
+    <div class="rec-by">Zi Eer · ${featured.date}</div>
     <div class="rec-desc">${featured.desc}</div>
-    <a class="rec-more">Ä‘á»c thÃªm..</a>`;
+    <a class="rec-more">đọc thêm..</a>`;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    RENDER SCHEDULE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 function renderSchedule() {
-  document.getElementById("weekLabel").textContent = `tuáº§n ${WEEK_OF}`;
+  document.getElementById("weekLabel").textContent = `tuần ${WEEK_OF}`;
   const list = document.getElementById("schedList");
   list.innerHTML = "";
 
   WEEK_SCHEDULE.forEach(d => {
     const row = document.createElement("div");
     row.className = `srow ${d.status}`;
-    const label = d.status === "tba" ? "â€” TBA" : "Offline";
+    const label = d.status === "tba" ? "— TBA" : "Offline";
     row.innerHTML = `
       <div class="day-badge">
         <div class="day-name">${d.day}</div>
@@ -1093,19 +1093,19 @@ function renderSchedule() {
   });
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    SEARCH CLEAR
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 document.querySelector(".search-x").addEventListener("click", () => {
   document.querySelector(".search-inp").value = "";
 });
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ════════════════════════
    INIT
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+════════════════════════ */
 renderFeatured();
 renderSchedule();
 
-</script>
+ </script>
 </body>
 </html>
