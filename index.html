@@ -795,23 +795,24 @@
 /* ══════════════════════════════════════════════════
    CẬP NHẬT MỖI TUẦN
 ══════════════════════════════════════════════════ */
-const WEEK_OF = "6/7 — 12/7";
+const WEEK_OF = "13/7 — 19/7";
 
 const WEEK_SCHEDULE = [
-  { day:"T.2", date:"6/7",  status:"stream",  activity:"MECCHA CHAMELEON", time:"20:00", note:"indie anime, tắc kÐ hoa đổi màu" },
-  { day:"T.3", date:"7/7",  status:"stream",  activity:"Home Sweet Home",  time:"20:00", note:"horror Thái Lan 🇹🇭" },
-  { day:"T.4", date:"8/7",  status:"stream",  activity:"Minecraft",        time:"20:00", note:"zây tự do, không lo gì cả" },
-  { day:"T.5", date:"9/7",  status:"stream",  activity:"Liar's Bar",      time:"20:00", note:"ai nói thật, ai nói dối?" },
-  { day:"T.6", date:"10/7", status:"stream",  activity:"Superliminal",    time:"20:00", note:"ảo ảnh không gian" },
-  { day:"T.7", date:"11/7", status:"stream",  activity:"Hariti Demo",     time:"20:00", note:"thự demo meới" },
-  { day:"CN",  date:"12/7", status:"stream",  activity:"Valorant",        time:"20:00", note:"chill + rank grind" },
+  { day:"T.2", date:"13/7", status:"stream",  activity:"Freetalk",  time:"20:00", note:"nói chuyện, yapping, không chủ đề cố định" },
+  { day:"T.3", date:"14/7", status:"off",     activity:"",          time:"",      note:"" },
+  { day:"T.4", date:"15/7", status:"off",     activity:"",          time:"",      note:"" },
+  { day:"T.5", date:"16/7", status:"stream",  activity:"Warframe",  time:"20:00", note:"space ninja, grind chill" },
+  { day:"T.6", date:"17/7", status:"off",     activity:"",          time:"",      note:"" },
+  { day:"T.7", date:"18/7", status:"off",     activity:"",          time:"",      note:"" },
+  { day:"CN",  date:"19/7", status:"off",     activity:"",          time:"",      note:"" },
 ];
 
 const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
+const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
-  id: 3,
-  date: `thứ Hai, 6/7`,
-  desc: `Tuần full stream —<br>7 ngày, 7 tựa game.<br>Bắt đầu với MECCHA CHAMELEON.`,
+  id: 4,
+  date: `thứ Hai, 13/7`,
+  desc: `Tuần này 2 stream —<br>thứ Hai talk chill,<br>thứ Năm chiến Warframe.`,
 } : null;
 
 /* ════════════════════════
