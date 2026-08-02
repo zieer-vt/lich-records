@@ -795,23 +795,23 @@
 /* ══════════════════════════════════════════════════
    CẬP NHẬT MỖI TUẦN
 ══════════════════════════════════════════════════ */
-const WEEK_OF = "27/7 — 2/8";
+const WEEK_OF = "3/8 — 9/8";
 
 const WEEK_SCHEDULE = [
-{ day:"T.2", date:"27/7", status:"stream",  activity:"Freetalk",         time:"20:00", note:"talk chill, không chủ đề cố định" },
-{ day:"T.3", date:"28/7", status:"off",     activity:"",                 time:"",      note:"" },
-{ day:"T.4", date:"29/7", status:"off",     activity:"",                 time:"",      note:"" },
-{ day:"T.5", date:"30/7", status:"stream",  activity:"Little Nightmares",time:"20:00", note:"kinh dị nhẹ, đi tìm lối thoát" },
-{ day:"T.6", date:"31/7", status:"off",     activity:"",                 time:"",      note:"" },
-{ day:"T.7", date:"1/8",  status:"stream",  activity:"Goose Goose Duck", time:"21:00", note:"collab — ai là nội gián?" },
-{ day:"CN",  date:"2/8",  status:"off",     activity:"",                 time:"",      note:"" },
+  { day:"T.2", date:"3/8",  status:"stream",  activity:"Cat Chess",        time:"20:00", note:"cờ vua phiên bản mèo" },
+  { day:"T.3", date:"4/8",  status:"off",     activity:"",                 time:"",      note:"" },
+  { day:"T.4", date:"5/8",  status:"off",     activity:"",                 time:"",      note:"" },
+  { day:"T.5", date:"6/8",  status:"off",     activity:"",                 time:"",      note:"" },
+  { day:"T.6", date:"7/8",  status:"stream",  activity:"Little Nightmares",time:"20:00", note:"kinh dị nhẹ, đi tìm lối thoát" },
+  { day:"T.7", date:"8/8",  status:"off",     activity:"",                 time:"",      note:"" },
+  { day:"CN",  date:"9/8",  status:"stream",  activity:"Liar Bar",         time:"20:00", note:"ai đang nói thật?" },
 ];
 
 const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
-id: 6,
-date: `thứ Hai, 27/7`,
-desc: `Tuần này 3 stream —<br>thứ Hai talk chill,<br>thứ Năm Little Nightmares,<br>thứ Bảy collab Goose Goose Duck.`,
+  id: 7,
+  date: `thứ Hai, 3/8`,
+  desc: `Tuần này 3 stream —<br>thứ Hai Cat Chess,<br>thứ Sáu Little Nightmares,<br>Chủ nhật Liar Bar.`,
 } : null;
 
 /* ════════════════════════
