@@ -795,23 +795,23 @@
 /* ══════════════════════════════════════════════════
    CẬP NHẬT MỖI TUẦN
 ══════════════════════════════════════════════════ */
-const WEEK_OF = "10/8 — 16/8";
+const WEEK_OF = "17/8 — 23/8";
 
 const WEEK_SCHEDULE = [
-  { day:"T.2", date:"10/8", status:"stream",  activity:"Yapping",                       time:"20:00", note:"talk show, không chủ đề cố định" },
-  { day:"T.3", date:"11/8", status:"off",     activity:"",                               time:"",      note:"" },
-  { day:"T.4", date:"12/8", status:"off",     activity:"",                               time:"",      note:"" },
-  { day:"T.5", date:"13/8", status:"stream",  activity:"Scary Game 2: The Mad Shepherd", time:"20:00", note:"kinh dị — theo bước gã chăn cừu điên" },
-  { day:"T.6", date:"14/8", status:"off",     activity:"",                               time:"",      note:"" },
-  { day:"T.7", date:"15/8", status:"off",     activity:"",                               time:"",      note:"" },
-  { day:"CN",  date:"16/8", status:"stream",  activity:"Machine Party",                  time:"20:00", note:"party game loạn" },
+  { day:"T.2", date:"17/8", status:"stream",  activity:"Yapping",           time:"20:00", note:"talk show, không chủ đề cố định" },
+  { day:"T.3", date:"18/8", status:"off",     activity:"",                  time:"",      note:"" },
+  { day:"T.4", date:"19/8", status:"stream",  activity:"Hariti",            time:"20:00", note:"" },
+  { day:"T.5", date:"20/8", status:"off",     activity:"",                  time:"",      note:"" },
+  { day:"T.6", date:"21/8", status:"stream",  activity:"King of the Bridge",time:"20:00", note:"" },
+  { day:"T.7", date:"22/8", status:"off",     activity:"",                  time:"",      note:"" },
+  { day:"CN",  date:"23/8", status:"off",     activity:"",                  time:"",      note:"" },
 ];
 
 const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
-  id: 8,
-  date: `thứ Hai, 10/8`,
-  desc: `Tuần này 3 stream —<br>thứ Hai Yapping,<br>thứ Năm Scary Game 2,<br>Chủ nhật Machine Party.`,
+  id: 9,
+  date: `thứ Hai, 17/8`,
+  desc: `Tuần này 3 stream —<br>thứ Hai Yapping,<br>thứ Tư Hariti,<br>thứ Sáu King of the Bridge.`,
 } : null;
 
 /* ════════════════════════
