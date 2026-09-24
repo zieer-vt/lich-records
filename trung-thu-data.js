@@ -34,5 +34,11 @@ window.TRUNG_THU_EVENT = {
 
   regulars: [
     // { ten: "Tên Discord", qua: 20000, daGui: false },
+  ],
+
+  // Nhạc riêng (không bắt buộc). Trang đã có sẵn 3 bản nhạc tự tạo.
+  // Muốn thêm bài mp3 của bạn: bỏ file vào repo rồi thêm một dòng, ví dụ:
+  //   { ten: "Celeste", moTa: "nhạc nền stream", file: "celeste.mp3" },
+  nhac: [
   ]
 };

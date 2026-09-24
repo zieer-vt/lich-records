@@ -741,7 +741,214 @@
     .lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
     .lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
 
+    /* ═══════════ MUSIC / VINYL ═══════════ */
+    #nhac {
+      background:
+        radial-gradient(ellipse at 22% 55%, rgba(255, 110, 40, .14), transparent 55%),
+        var(--night);
+    }
+    .player {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.8rem, 5vw, 3.5rem);
+      align-items: center;
+    }
+    .vinyl-wrap {
+      position: relative;
+      width: min(100%, 440px);
+      aspect-ratio: 1;
+      justify-self: center;
+    }
+    .vinyl {
+      width: 100%;
+      height: 100%;
+      animation: spin 9s linear infinite;
+      animation-play-state: paused;
+      filter: drop-shadow(0 0 26px rgba(255, 120, 50, .22));
+      transition: filter 1s;
+    }
+    .music-on .vinyl {
+      animation-play-state: running;
+      filter: drop-shadow(0 0 42px rgba(255, 130, 50, .45));
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* Light reflection stays still while the record turns */
+    .vinyl-gloss {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      background: conic-gradient(from 210deg,
+        transparent 0 8%, rgba(255, 220, 170, .09) 13%, transparent 19% 58%,
+        rgba(255, 220, 170, .06) 63%, transparent 69%);
+    }
+    .vinyl-arc {
+      position: absolute;
+      inset: -4%;
+      width: 108%;
+      height: 108%;
+      pointer-events: none;
+      opacity: .7;
+      transition: opacity .6s;
+    }
+    .music-on .vinyl-arc { animation: arcPulse 3s ease-in-out infinite; }
+    @keyframes arcPulse { 50% { opacity: 1; } }
+    .vinyl-play {
+      position: absolute;
+      left: 6%; bottom: 6%;
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 226, 163, .5);
+      background: rgba(30, 16, 20, .7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--gold-soft);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .4);
+      transition: transform .2s, background .2s;
+    }
+    .vinyl-play:hover { transform: scale(1.06); background: rgba(60, 26, 20, .8); }
+    .vinyl-play:focus-visible, .ctl:focus-visible, .track:focus-visible, .dock-btn:focus-visible {
+      outline: 2px solid var(--gold); outline-offset: 3px;
+    }
+    .vinyl-play svg { width: 18px; height: 18px; }
+    .now-label {
+      position: absolute;
+      left: calc(6% + 70px);
+      bottom: calc(6% + 18px);
+      font-size: .82rem;
+      color: var(--gold-soft);
+      opacity: 0;
+      transition: opacity .5s;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, .8);
+    }
+    .music-on .now-label { opacity: 1; }
+
+    .player-card {
+      padding: clamp(1.4rem, 4vw, 2.2rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .player-card h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 4.4vw, 2.8rem);
+      line-height: 1.1;
+      text-wrap: balance;
+    }
+    .track-sub { font-style: italic; color: var(--ink-dim); margin-top: .3rem; }
+    .player-note { font-size: .9rem; color: var(--ink-mid); max-width: 46ch; }
+    .tracklist { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .track {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      width: 100%;
+      padding: .7rem .9rem;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .track:hover { background: rgba(255, 200, 97, .06); }
+    .track.active { background: rgba(255, 200, 97, .1); border-color: rgba(255, 200, 97, .35); }
+    .track-no { font-family: var(--serif); font-style: italic; color: var(--ember); width: 1.4rem; flex: 0 0 auto; }
+    .track-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    .track-name small { display: block; font-size: .78rem; color: var(--ink-dim); }
+    .track-tag {
+      flex: 0 0 auto;
+      font-size: .7rem;
+      padding: .15rem .55rem;
+      border-radius: 999px;
+      background: rgba(255, 200, 97, .12);
+      color: var(--gold);
+    }
+    .controls { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; }
+    .ctl {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--card-line);
+      background: rgba(255, 255, 255, .04);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .ctl:hover { background: rgba(255, 200, 97, .12); }
+    .ctl svg { width: 16px; height: 16px; }
+    .ctl.main {
+      width: 54px; height: 54px;
+      border: none;
+      color: #2a0e05;
+      background: linear-gradient(135deg, var(--gold-soft), var(--ember));
+      box-shadow: 0 6px 22px rgba(255, 110, 40, .4);
+    }
+    .eq { display: flex; align-items: flex-end; gap: 3px; height: 22px; margin-left: .2rem; opacity: .25; transition: opacity .4s; }
+    .music-on .eq { opacity: 1; }
+    .eq i { width: 4px; height: 6px; border-radius: 2px; background: var(--gold); }
+    .music-on .eq i { animation: eq 1s ease-in-out infinite; }
+    .eq i:nth-child(2) { animation-duration: .7s !important; }
+    .eq i:nth-child(3) { animation-duration: 1.2s !important; }
+    .eq i:nth-child(4) { animation-duration: .85s !important; }
+    @keyframes eq { 50% { height: 22px; } }
+    .vol { flex: 1 1 150px; display: flex; align-items: center; gap: .5rem; color: var(--ink-dim); }
+    .vol input { flex: 1; min-width: 0; accent-color: var(--gold); }
+    .music-error { font-size: .85rem; color: #ffb4a2; }
+
+    /* Mini player, always reachable */
+    .dock {
+      position: fixed;
+      left: 1rem;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      max-width: calc(100% - 5.5rem);
+      padding: .35rem 1rem .35rem .35rem;
+      border-radius: 999px;
+      background: rgba(20, 10, 14, .78);
+      border: 1px solid var(--card-line);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dock-btn {
+      position: relative;
+      flex: 0 0 auto;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: #fff4e2;
+      background: repeating-radial-gradient(circle, #1b1320 0 2px, #261b2c 2px 3px);
+    }
+    .dock-btn::before {
+      content: "";
+      position: absolute;
+      inset: 30%;
+      border-radius: 50%;
+      background: radial-gradient(circle, #e0452a, #8e1d12);
+    }
+    .music-on .dock-btn::before { animation: spin 3s linear infinite; background: conic-gradient(#e0452a, #ffb347, #e0452a); }
+    .dock-btn svg { position: relative; width: 12px; height: 12px; }
+    .dock-info { min-width: 0; display: flex; flex-direction: column; line-height: 1.25; text-decoration: none; }
+    .dock-title { font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dock-sub { font-size: .7rem; color: var(--ink-dim); white-space: nowrap; }
+
     /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 820px) {
+      .player { grid-template-columns: 1fr; }
+      .vinyl-wrap { width: min(100%, 340px); }
+    }
     @media (max-width: 720px) {
       .nav-links { display: none; }
       .timeline li { padding-left: 52px; }
@@ -752,6 +959,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
+      .vinyl, .dock-btn::before, .eq i, .vinyl-arc { animation: none !important; }
     }
   </style>
 </head>
@@ -763,6 +971,7 @@
     <a href="#top" class="brand"><span class="brand-moon"></span>Trăng Rằm</a>
     <ul class="nav-links">
       <li><a href="#su-kien">Fanart</a></li>
+      <li><a href="#nhac">Nhạc</a></li>
       <li><a href="#uoc-nguyen">Thả đèn</a></li>
       <li><a href="#truyen-thuyet">Truyền thuyết</a></li>
       <li><a href="#banh">Bánh Trung Thu</a></li>
@@ -841,6 +1050,79 @@
             <span>Những cái tên luôn có mặt khi thư viện mở cửa</span>
           </div>
           <ul class="regulars" id="regulars"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ MUSIC ═══════════ -->
+    <section class="block" id="nhac">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="sec-kicker">Âm nhạc</span>
+          <h2>Đĩa nhạc đêm rằm</h2>
+          <p>Đặt kim xuống đĩa, để tiếng đàn tranh theo bạn đi hết trang.</p>
+        </div>
+
+        <div class="player">
+          <div class="vinyl-wrap reveal">
+            <svg class="vinyl" id="vinyl" viewBox="0 0 400 400" aria-hidden="true">
+              <defs>
+                <radialGradient id="discGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#2a1d2e"/>
+                  <stop offset="60%" stop-color="#1a1220"/>
+                  <stop offset="100%" stop-color="#0e0a14"/>
+                </radialGradient>
+                <radialGradient id="labelGrad" cx="45%" cy="40%" r="65%">
+                  <stop offset="0%" stop-color="#e0452a"/>
+                  <stop offset="100%" stop-color="#7c1a10"/>
+                </radialGradient>
+                <radialGradient id="moonGrad" cx="40%" cy="38%" r="60%">
+                  <stop offset="0%" stop-color="#fffaf0"/>
+                  <stop offset="100%" stop-color="#e8dcc0"/>
+                </radialGradient>
+                <path id="labelPath" d="M200,200 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/>
+              </defs>
+              <circle cx="200" cy="200" r="198" fill="url(#discGrad)"/>
+              <g id="grooves"></g>
+              <circle cx="200" cy="200" r="72" fill="url(#labelGrad)"/>
+              <circle cx="200" cy="200" r="72" fill="none" stroke="#ffc861" stroke-opacity=".6" stroke-width="1.2"/>
+              <circle cx="200" cy="200" r="64" fill="none" stroke="#ffe2a3" stroke-opacity=".25" stroke-width=".6"/>
+              <text font-family="'Be Vietnam Pro',sans-serif" font-size="8.5" font-weight="700" fill="#ffe2a3" fill-opacity=".85" letter-spacing="2">
+                <textPath href="#labelPath" textLength="318" lengthAdjust="spacing">CHRONO ARCHIVE · RẰM THÁNG TÁM · ZI EER ·</textPath>
+              </text>
+              <circle cx="200" cy="200" r="22" fill="url(#moonGrad)"/>
+              <circle cx="193" cy="195" r="4" fill="#dccfae"/>
+              <circle cx="207" cy="208" r="5" fill="#dccfae"/>
+              <circle cx="200" cy="200" r="3.2" fill="#140d18"/>
+            </svg>
+            <div class="vinyl-gloss"></div>
+            <svg class="vinyl-arc" viewBox="0 0 432 432" aria-hidden="true">
+              <circle cx="216" cy="216" r="211" fill="none" stroke="#ffc861" stroke-width="4"
+                stroke-linecap="round" stroke-dasharray="290 1036" stroke-dashoffset="250"/>
+            </svg>
+            <button class="vinyl-play" id="vinylPlay" type="button" aria-label="Phát nhạc"><svg class="i-play" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true"><polygon points="1,0 12,7 1,14"/></svg><svg class="i-pause" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true" hidden><rect x="0" y="0" width="4" height="14" rx="1.2"/><rect x="8" y="0" width="4" height="14" rx="1.2"/></svg></button>
+            <span class="now-label">♪ đang phát</span>
+          </div>
+
+          <div class="player-card card reveal">
+            <div>
+              <span class="sec-kicker">Record · Rằm tháng Tám</span>
+              <h3 id="trackTitle">Khúc Trăng Rằm</h3>
+              <p class="track-sub" id="trackSub">Zi Eer · đàn tranh dưới trăng</p>
+            </div>
+            <p class="player-note">Các giai điệu được dệt ngay trong trình duyệt của bạn, nên mỗi lần nghe lại hơi khác một chút. Như trăng, mỗi đêm một vẻ.</p>
+            <ol class="tracklist" id="trackList"></ol>
+            <div class="controls">
+              <button class="ctl" id="prevBtn" type="button" aria-label="Bài trước"><svg viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="2.4" height="14" rx="1"/><polygon points="14,0 3,7 14,14"/></svg></button>
+              <button class="ctl main" id="mainPlay" type="button" aria-label="Phát nhạc"><svg class="i-play" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true"><polygon points="1,0 12,7 1,14"/></svg><svg class="i-pause" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true" hidden><rect x="0" y="0" width="4" height="14" rx="1.2"/><rect x="8" y="0" width="4" height="14" rx="1.2"/></svg></button>
+              <button class="ctl" id="nextBtn" type="button" aria-label="Bài sau"><svg viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><polygon points="0,0 11,7 0,14"/><rect x="11.6" y="0" width="2.4" height="14" rx="1"/></svg></button>
+              <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <label class="vol" for="volSlider"><span aria-hidden="true">♫</span><span style="position:absolute;left:-9999px">Âm lượng</span>
+                <input id="volSlider" type="range" min="0" max="100" value="60">
+              </label>
+            </div>
+            <p class="music-error" id="musicError" hidden></p>
+          </div>
         </div>
       </div>
     </section>
@@ -996,6 +1278,14 @@
   </footer>
 
   <button class="sky-toggle" id="skyToggle" aria-label="Tắt/bật hiệu ứng đèn trời" title="Tắt/bật hiệu ứng">🏮</button>
+
+  <div class="dock" id="dock">
+    <button class="dock-btn" id="dockBtn" type="button" aria-label="Phát nhạc"><svg class="i-play" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true"><polygon points="1,0 12,7 1,14"/></svg><svg class="i-pause" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true" hidden><rect x="0" y="0" width="4" height="14" rx="1.2"/><rect x="8" y="0" width="4" height="14" rx="1.2"/></svg></button>
+    <a class="dock-info" href="#nhac">
+      <span class="dock-title" id="dockTitle">Khúc Trăng Rằm</span>
+      <span class="dock-sub" id="dockSub">bấm để nghe nhạc</span>
+    </a>
+  </div>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem fanart" hidden>
     <button class="lb-btn lb-close" id="lbClose" aria-label="Đóng">✕</button>
@@ -1451,6 +1741,365 @@
       else if (e.key === 'ArrowLeft') showArt(lbIndex - 1);
       else if (e.key === 'ArrowRight') showArt(lbIndex + 1);
     });
+
+    /* ─── Music: generated in the browser with Web Audio ─── */
+    const Synth = (() => {
+      let ctx = null, master = null, verb = null, buses = {}, timer = null, cur = null, st = null;
+      const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+      const seeded = a => () => {
+        a |= 0; a = a + 0x6D2B79F5 | 0;
+        let t = Math.imul(a ^ a >>> 15, 1 | a);
+        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+
+      function ensure() {
+        if (ctx) return true;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return false;
+        ctx = new AC();
+        master = ctx.createGain();
+        master.gain.value = 0;
+        const comp = ctx.createDynamicsCompressor();
+        comp.threshold.value = -16; comp.ratio.value = 3;
+        master.connect(comp); comp.connect(ctx.destination);
+
+        // Hall reverb from a decaying noise impulse
+        verb = ctx.createConvolver();
+        const len = Math.floor(ctx.sampleRate * 3.2);
+        const ir = ctx.createBuffer(2, len, ctx.sampleRate);
+        for (let ch = 0; ch < 2; ch++) {
+          const d = ir.getChannelData(ch);
+          for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6);
+        }
+        verb.buffer = ir;
+        verb.connect(master);
+
+        const bus = (dry, send) => {
+          const g = ctx.createGain(); g.gain.value = dry; g.connect(master);
+          const s = ctx.createGain(); s.gain.value = send; g.connect(s); s.connect(verb);
+          return g;
+        };
+        buses = { pluck: bus(.9, .32), pad: bus(.8, .55), bell: bus(.6, .7), drum: bus(.9, .12) };
+        return true;
+      }
+
+      // Plucked zither voice; `bend` slides up into the note like a đàn tranh press, then vibrates
+      function pluck(t, midi, vel, bend) {
+        const f = mtof(midi), dur = midi < 55 ? 2.8 : 1.9;
+        const o = ctx.createOscillator(), o2 = ctx.createOscillator();
+        o.type = 'triangle'; o2.type = 'sine';
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = 1.2;
+        const g = ctx.createGain(), g2 = ctx.createGain(); g2.gain.value = .3;
+        if (bend) {
+          o.frequency.setValueAtTime(f * 0.944, t); o.frequency.exponentialRampToValueAtTime(f, t + .13);
+          o2.frequency.setValueAtTime(f * 1.888, t); o2.frequency.exponentialRampToValueAtTime(f * 2, t + .13);
+          const lfo = ctx.createOscillator(), depth = ctx.createGain();
+          lfo.frequency.value = 5.2;
+          depth.gain.setValueAtTime(0, t); depth.gain.linearRampToValueAtTime(f * .01, t + .5);
+          lfo.connect(depth); depth.connect(o.frequency);
+          lfo.start(t); lfo.stop(t + dur);
+        } else {
+          o.frequency.setValueAtTime(f, t); o2.frequency.setValueAtTime(f * 2, t);
+        }
+        lp.frequency.setValueAtTime(Math.min(f * 9, 9000), t);
+        lp.frequency.exponentialRampToValueAtTime(Math.max(f * 1.3, 180), t + dur * .7);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(.3 * vel, t + .004);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+        o.connect(lp); o2.connect(g2); g2.connect(lp); lp.connect(g); g.connect(buses.pluck);
+        o.start(t); o2.start(t); o.stop(t + dur + .05); o2.stop(t + dur + .05);
+      }
+
+      function pad(t, midis, dur, level) {
+        const g = ctx.createGain(), lp = ctx.createBiquadFilter();
+        lp.type = 'lowpass'; lp.frequency.value = 850;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(level, t + dur * .35);
+        g.gain.setValueAtTime(level, t + dur * .75);
+        g.gain.linearRampToValueAtTime(0.0001, t + dur + 1.4);
+        lp.connect(g); g.connect(buses.pad);
+        midis.forEach(m => [-6, 6].forEach((c, i) => {
+          const o = ctx.createOscillator();
+          o.type = i ? 'triangle' : 'sine';
+          o.frequency.value = mtof(m); o.detune.value = c;
+          o.connect(lp); o.start(t); o.stop(t + dur + 1.5);
+        }));
+      }
+
+      function bell(t, midi, vel) {
+        const f = mtof(midi);
+        [[1, 1, 3.4], [2.76, .35, 1.6], [5.4, .14, .8], [8.9, .05, .4]].forEach(([r, a, d]) => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.frequency.value = f * r;
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.exponentialRampToValueAtTime(.08 * a * vel, t + .003);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+          o.connect(g); g.connect(buses.bell); o.start(t); o.stop(t + d + .05);
+        });
+      }
+
+      // Soft festival drum for the lantern procession track
+      function drum(t, vel) {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.frequency.setValueAtTime(115, t); o.frequency.exponentialRampToValueAtTime(46, t + .25);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(.42 * vel, t + .006);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + .5);
+        o.connect(g); g.connect(buses.drum); o.start(t); o.stop(t + .55);
+      }
+
+      const noteOf = (tr, deg) => {
+        const n = tr.scale.length, o = Math.floor(deg / n);
+        return tr.root + 12 * o + tr.scale[((deg % n) + n) % n];
+      };
+
+      // A two-bar phrase on an 8th-note grid (16 steps) that lands on `endDeg`
+      function motif(tr, rnd, startDeg, endDeg) {
+        const pat = new Array(16).fill(null);
+        let d = startDeg;
+        for (let i = 0; i < 12; i++) {
+          const strong = i % 4 === 0;
+          const p = i === 0 ? 1 : tr.density * (strong ? 1.5 : (i % 2 ? .6 : 1));
+          if (rnd() < p) {
+            if (i) d += [-2, -1, -1, 0, 1, 1, 2][Math.floor(rnd() * 7)];
+            d = Math.max(tr.lo, Math.min(tr.hi, d));
+            pat[i] = { deg: d, vel: (strong ? .85 : .6) + rnd() * .15, bend: rnd() < .15 };
+          }
+        }
+        pat[12] = { deg: endDeg, vel: .85, bend: rnd() < .45 };
+        return pat;
+      }
+      const withTail = (a, b) => a.slice(0, 8).concat(b.slice(8));
+
+      function compose(tr, rnd, keepA) {
+        const A = keepA || motif(tr, rnd, tr.start, 1);
+        const A2 = withTail(A, motif(tr, rnd, tr.start, 0));
+        const B = motif(tr, rnd, tr.start + 2, 3);
+        return { A, form: [A, A2, B, A2] };
+      }
+
+      function playStep(t) {
+        const tr = cur, rnd = st.rnd, s = st.step;
+        const bar = Math.floor(s / 8) % 8, inBar = s % 8, phrase = Math.floor(bar / 2), pStep = s % 16;
+        const chord = tr.chords[phrase];
+        const beat = 60 / tr.bpm;
+
+        if (pStep === 0) {
+          if (s % 64 === 0 && st.cycle > 0) {
+            // Evolve the tune each time round: new B section, sometimes a new A
+            const c = compose(tr, rnd, st.cycle % 2 ? st.A : null);
+            st.A = c.A; st.form = c.form;
+          }
+          const base = chord[0] + 12, third = chord[1] === 'm' ? 3 : 4;
+          pad(t, [base, base + third, base + 7], beat * 8, tr.pad);
+          if (rnd() < tr.bell) bell(t + beat * 2, noteOf(tr, [0, 3, 5][Math.floor(rnd() * 3)]) + 12, .7);
+        }
+        if (inBar === 0) pluck(t, chord[0], .7, false);
+        if (inBar === 4 && tr.fifth) pluck(t, chord[0] + 7, .42, false);
+        if (tr.drum) {
+          if (inBar === 0) drum(t, 1);
+          else if (inBar === 4) drum(t, .5);
+          else if (inBar === 7 && rnd() < .4) drum(t, .28);
+        }
+        const intro = st.cycle === 0 && bar < 2;
+        const n = st.form[phrase][pStep];
+        if (n && !intro) pluck(t + (rnd() - .5) * .012, noteOf(tr, n.deg), n.vel, n.bend);
+
+        st.step++;
+        if (st.step % 64 === 0) st.cycle++;
+      }
+
+      function tick() {
+        const ahead = document.hidden ? 1.5 : .25;
+        const stepLen = 60 / cur.bpm / 2;
+        while (st.next < ctx.currentTime + ahead) {
+          playStep(st.next);
+          st.next += stepLen;
+        }
+      }
+
+      return {
+        start(tr, gain) {
+          if (!ensure()) return false;
+          ctx.resume();
+          if (cur !== tr || !st) {
+            cur = tr;
+            const rnd = seeded(tr.seed);
+            const c = compose(tr, rnd);
+            st = { rnd, A: c.A, form: c.form, step: 0, cycle: 0, next: 0 };
+          }
+          st.next = Math.max(st.next, ctx.currentTime + .08);
+          master.gain.cancelScheduledValues(ctx.currentTime);
+          master.gain.setTargetAtTime(gain, ctx.currentTime, .35);
+          clearInterval(timer);
+          timer = setInterval(tick, 50);
+          tick();
+          return true;
+        },
+        stop() {
+          if (!ctx || !timer) return;
+          clearInterval(timer); timer = null;
+          master.gain.cancelScheduledValues(ctx.currentTime);
+          master.gain.setTargetAtTime(0, ctx.currentTime, .12);
+          setTimeout(() => { if (!timer) ctx.suspend(); }, 600);
+        },
+        volume(gain) {
+          if (ctx && timer) master.gain.setTargetAtTime(gain, ctx.currentTime, .05);
+        }
+      };
+    })();
+
+    // [root midi, 'M'|'m'] — each chord lasts two bars
+    const GEN_TRACKS = [
+      { type: 'gen', title: 'Khúc Trăng Rằm', sub: 'đàn tranh dưới trăng', tag: 'êm',
+        root: 67, scale: [0, 2, 4, 7, 9], bpm: 72, density: .42, lo: -3, hi: 7, start: 2,
+        chords: [[43, 'M'], [40, 'm'], [48, 'M'], [50, 'M']], fifth: true, drum: false, bell: .35, pad: .022, seed: 815 },
+      { type: 'gen', title: 'Đèn Trời Bay Lên', sub: 'rước đèn qua phố cổ', tag: 'rộn ràng',
+        root: 62, scale: [0, 2, 4, 7, 9], bpm: 92, density: .55, lo: 0, hi: 9, start: 4,
+        chords: [[50, 'M'], [47, 'm'], [43, 'M'], [45, 'M']], fifth: true, drum: true, bell: .25, pad: .016, seed: 2509 },
+      { type: 'gen', title: 'Thư Viện Đêm Rằm', sub: 'khi Archive đã tắt đèn', tag: 'tĩnh',
+        root: 69, scale: [0, 3, 5, 7, 10], bpm: 56, density: .3, lo: -3, hi: 6, start: 0,
+        chords: [[45, 'm'], [41, 'M'], [48, 'M'], [43, 'M']], fifth: false, drum: false, bell: .6, pad: .03, seed: 1508 }
+    ];
+    const FILE_TRACKS = (Array.isArray(EVENT.nhac) ? EVENT.nhac : [])
+      .filter(t => t && t.file && t.ten)
+      .map(t => ({ type: 'file', title: t.ten, sub: t.moTa || 'Zi Eer', tag: 'mp3', file: t.file }));
+    const TRACKS = [...GEN_TRACKS, ...FILE_TRACKS];
+
+    const audio = new Audio();
+    audio.preload = 'none';
+    let loadedFile = '';
+    let trackIdx = Math.min(Math.max(0, Number(store.get('tt-track', 0)) || 0), TRACKS.length - 1);
+    let vol = Number(store.get('tt-vol', 60));
+    if (!(vol >= 0 && vol <= 100)) vol = 60;
+    let musicOn = false;
+
+    const volSlider = document.getElementById('volSlider');
+    const musicError = document.getElementById('musicError');
+    const playButtons = ['vinylPlay', 'mainPlay', 'dockBtn'].map(id => document.getElementById(id));
+    const synthGain = v => (v / 100) * 1.6;
+    volSlider.value = vol;
+
+    // Grooves: fine rings with two wider gaps between "songs"
+    const grooves = document.getElementById('grooves');
+    for (let r = 78; r < 196; r += 2.4) {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const gap = Math.abs(r - 118) < 1.3 || Math.abs(r - 157) < 1.3;
+      c.setAttribute('cx', 200); c.setAttribute('cy', 200); c.setAttribute('r', r.toFixed(1));
+      c.setAttribute('fill', 'none');
+      c.setAttribute('stroke', gap ? '#07050a' : '#ffffff');
+      c.setAttribute('stroke-opacity', gap ? '.9' : (Math.round(r / 2.4) % 2 ? '.05' : '.025'));
+      c.setAttribute('stroke-width', gap ? '2.2' : '.8');
+      grooves.appendChild(c);
+    }
+
+    const trackList = document.getElementById('trackList');
+    TRACKS.forEach((t, i) => {
+      const li = el('li');
+      const b = el('button', 'track');
+      b.type = 'button';
+      const name = el('span', 'track-name', t.title);
+      name.appendChild(el('small', null, t.sub));
+      b.append(el('span', 'track-no', String(i + 1)), name, el('span', 'track-tag', t.tag));
+      b.addEventListener('click', () => {
+        if (i === trackIdx && musicOn) return;
+        selectTrack(i); play();
+      });
+      li.appendChild(b);
+      trackList.appendChild(li);
+    });
+
+    function renderTrack() {
+      const t = TRACKS[trackIdx];
+      document.getElementById('trackTitle').textContent = t.title;
+      document.getElementById('trackSub').textContent = 'Zi Eer · ' + t.sub;
+      document.getElementById('dockTitle').textContent = t.title;
+      trackList.querySelectorAll('.track').forEach((b, i) => {
+        b.classList.toggle('active', i === trackIdx);
+        b.setAttribute('aria-current', i === trackIdx ? 'true' : 'false');
+      });
+      if ('mediaSession' in navigator && window.MediaMetadata) {
+        try {
+          navigator.mediaSession.metadata = new MediaMetadata({ title: t.title, artist: 'Zi Eer', album: 'Đêm Hội Trăng Rằm' });
+        } catch {}
+      }
+    }
+
+    function setPlaying(on) {
+      musicOn = on;
+      document.body.classList.toggle('music-on', on);
+      playButtons.forEach(b => {
+        b.querySelector('.i-play').toggleAttribute('hidden', on);
+        b.querySelector('.i-pause').toggleAttribute('hidden', !on);
+        b.setAttribute('aria-label', on ? 'Tạm dừng nhạc' : 'Phát nhạc');
+      });
+      document.getElementById('dockSub').textContent = on ? '♪ đang phát' : 'bấm để nghe nhạc';
+      if ('mediaSession' in navigator) {
+        try { navigator.mediaSession.playbackState = on ? 'playing' : 'paused'; } catch {}
+      }
+    }
+
+    function showError(msg) {
+      musicError.textContent = msg;
+      musicError.hidden = !msg;
+    }
+
+    function play() {
+      const t = TRACKS[trackIdx];
+      showError('');
+      if (t.type === 'gen') {
+        audio.pause();
+        if (!Synth.start(t, synthGain(vol))) {
+          showError('Trình duyệt này chưa hỗ trợ phát nhạc. Hãy thử Chrome, Safari hoặc Firefox bản mới.');
+          return;
+        }
+        setPlaying(true);
+      } else {
+        Synth.stop();
+        if (loadedFile !== t.file) { audio.src = t.file; loadedFile = t.file; }
+        audio.volume = vol / 100;
+        setPlaying(true);
+        audio.play().catch(() => {
+          setPlaying(false);
+          showError('Không mở được file "' + t.file + '". Kiểm tra lại tên file trong trung-thu-data.js.');
+        });
+      }
+    }
+
+    function pause() {
+      Synth.stop();
+      audio.pause();
+      setPlaying(false);
+    }
+
+    function selectTrack(i) {
+      trackIdx = (i + TRACKS.length) % TRACKS.length;
+      store.set('tt-track', trackIdx);
+      renderTrack();
+    }
+
+    const toggle = () => (musicOn ? pause() : play());
+    playButtons.forEach(b => b.addEventListener('click', toggle));
+    document.getElementById('prevBtn').addEventListener('click', () => { selectTrack(trackIdx - 1); if (musicOn) play(); });
+    document.getElementById('nextBtn').addEventListener('click', () => { selectTrack(trackIdx + 1); if (musicOn) play(); });
+    audio.addEventListener('ended', () => { selectTrack(trackIdx + 1); play(); });
+    volSlider.addEventListener('input', () => {
+      vol = Number(volSlider.value);
+      store.set('tt-vol', vol);
+      audio.volume = vol / 100;
+      Synth.volume(synthGain(vol));
+    });
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.setActionHandler('play', play);
+        navigator.mediaSession.setActionHandler('pause', pause);
+        navigator.mediaSession.setActionHandler('previoustrack', () => { selectTrack(trackIdx - 1); play(); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { selectTrack(trackIdx + 1); play(); });
+      } catch {}
+    }
+    renderTrack();
+    setPlaying(false);
 
     /* ─── Scroll reveal ─── */
     const io = 'IntersectionObserver' in window
