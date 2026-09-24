@@ -40,6 +40,7 @@
     }
 
     img, svg { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
     a { color: inherit; }
 
     /* ═══════════ SKY CANVAS (lanterns + sparks, fixed behind content) ═══════════ */
@@ -549,6 +550,197 @@
     }
     .sky-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
+    /* ═══════════ FANART EVENT ═══════════ */
+    #su-kien {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 200, 97, .12), transparent 60%),
+        var(--night-2);
+    }
+    .event-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.4rem;
+    }
+    .event-way { padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .4rem; }
+    .event-way h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--gold-soft); }
+    .event-way p { font-size: .9rem; color: var(--ink-mid); }
+    .event-prize {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+    }
+    .event-prize small { font-family: var(--sans); font-size: .8rem; color: var(--ink-dim); }
+    .event-rules {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .35rem;
+      font-size: .88rem;
+      color: var(--ink-mid);
+    }
+    .event-rules strong { color: var(--ink); font-weight: 500; }
+    .hashtags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+    .hashtags span {
+      font-size: .78rem;
+      padding: .15rem .6rem;
+      border-radius: 999px;
+      background: rgba(255, 200, 97, .12);
+      color: var(--gold);
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .8rem;
+      margin-bottom: 2.4rem;
+    }
+    .stat {
+      flex: 1 1 150px;
+      max-width: 220px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
+
+    .sub-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 0 0 1.2rem;
+    }
+    .sub-head h3 { font-family: var(--serif); font-size: 1.6rem; }
+    .sub-head span { font-size: .85rem; color: var(--ink-dim); }
+
+    .gallery {
+      columns: 3 260px;
+      column-gap: 1rem;
+    }
+    .art {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      padding: 0;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: zoom-in;
+      transition: transform .3s, border-color .3s;
+    }
+    .art:hover { transform: translateY(-4px); border-color: rgba(255, 200, 97, .55); }
+    .art:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .art img { width: 100%; height: auto; background: rgba(255, 255, 255, .04); }
+    .art-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+      padding: .8rem 1rem;
+    }
+    .art-who { min-width: 0; }
+    .art-name { font-weight: 500; overflow-wrap: anywhere; }
+    .art-channel { font-size: .8rem; color: var(--ink-dim); overflow-wrap: anywhere; }
+
+    .gift {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .78rem;
+      font-weight: 500;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      background: rgba(255, 200, 97, .12);
+      color: var(--gold);
+      border: 1px solid rgba(255, 200, 97, .3);
+    }
+    .gift.sent {
+      background: rgba(120, 220, 150, .12);
+      color: #9be3b0;
+      border-color: rgba(120, 220, 150, .35);
+    }
+
+    .regulars {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .6rem;
+      list-style: none;
+    }
+    .regular {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+      padding: .7rem 1rem;
+      border-radius: 14px;
+    }
+    .regular-name { overflow-wrap: anywhere; min-width: 0; }
+
+    .empty {
+      text-align: center;
+      padding: 2rem 1.4rem;
+      color: var(--ink-mid);
+      font-size: .95rem;
+    }
+    .empty strong { display: block; font-family: var(--serif); font-size: 1.2rem; color: var(--gold-soft); margin-bottom: .3rem; font-weight: 500; }
+    .event-block + .event-block { margin-top: 3rem; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(6, 6, 14, .92);
+      backdrop-filter: blur(6px);
+    }
+    .lb-figure {
+      max-width: min(1000px, 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .8rem;
+    }
+    .lb-figure img {
+      max-height: 78vh;
+      width: auto;
+      border-radius: 12px;
+      box-shadow: var(--glow);
+    }
+    .lb-caption { text-align: center; }
+    .lb-caption a { color: var(--gold); }
+    .lb-btn {
+      position: absolute;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--card-line);
+      background: rgba(20, 10, 14, .8);
+      color: var(--ink);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    .lb-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .lb-close { top: calc(1rem + env(safe-area-inset-top, 0px)); right: 1rem; }
+    .lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
+
     /* ═══════════ RESPONSIVE ═══════════ */
     @media (max-width: 720px) {
       .nav-links { display: none; }
@@ -570,6 +762,7 @@
   <nav class="nav" id="nav">
     <a href="#top" class="brand"><span class="brand-moon"></span>Trăng Rằm</a>
     <ul class="nav-links">
+      <li><a href="#su-kien">Fanart</a></li>
       <li><a href="#uoc-nguyen">Thả đèn</a></li>
       <li><a href="#truyen-thuyet">Truyền thuyết</a></li>
       <li><a href="#banh">Bánh Trung Thu</a></li>
@@ -589,13 +782,68 @@
 
       <div class="hero-actions">
         <a href="#uoc-nguyen" class="btn">🏮 Thả đèn ước nguyện</a>
-        <a href="#truyen-thuyet" class="btn ghost">Khám phá</a>
+        <a href="#su-kien" class="btn ghost">Xem fanart &amp; quà</a>
       </div>
     </div>
     <span class="scroll-hint">CUỘN XUỐNG ↓</span>
   </header>
 
   <main>
+
+    <!-- ═══════════ FANART EVENT ═══════════ -->
+    <section class="block" id="su-kien">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="sec-kicker">Sự kiện của Chrono Archive</span>
+          <h2>Kệ tranh Trung Thu</h2>
+          <p>Mùa trăng này, thư viện dành riêng một kệ cho những bức tranh các bạn vẽ Zi Eer đón Trung Thu, cùng tên những người vẫn thường ghé lại mỗi khi Archive mở cửa.</p>
+        </div>
+
+        <div class="event-info">
+          <div class="event-way card reveal">
+            <span class="sec-kicker">Cách 1</span>
+            <h3>Vẽ fanart</h3>
+            <div class="event-prize">50.000đ <small>/ tác phẩm hợp lệ</small></div>
+            <p>Chủ đề: Zi Eer đón Trung Thu (đèn lồng, ánh trăng, thư viện… vẽ theo ý bạn). Đăng tranh kèm hashtag hoặc gửi trong Discord, ghi rõ tên kênh của bạn.</p>
+            <div class="hashtags"><span>#ChronoArchive</span><span>#zierune</span><span>#zieer</span></div>
+          </div>
+          <div class="event-way card reveal">
+            <span class="sec-kicker">Cách 2</span>
+            <h3>Người xem thường xuyên</h3>
+            <div class="event-prize">20.000đ <small>/ mỗi bạn</small></div>
+            <p>Ai theo dõi kênh đều đặn cũng có quà. Comment dưới bài đăng sự kiện kèm tên Discord của bạn.</p>
+          </div>
+          <div class="event-way card reveal">
+            <span class="sec-kicker">Thể lệ</span>
+            <h3>Cần biết</h3>
+            <ul class="event-rules">
+              <li><strong>Hạn nhận tranh:</strong> hết ngày <span data-field="hanNopTranh">24/9</span>. Tranh sẽ được show trong stream Trung Thu.</li>
+              <li>Tranh tự vẽ, không dùng AI. Luôn ghi credit tác giả.</li>
+              <li>Quà gửi qua MoMo, chuyển khoản hoặc thẻ điện thoại, trước ngày <span data-field="hanGuiQua">30/9</span>. Zi sẽ nhắn riêng, đừng đăng số tài khoản công khai.</li>
+              <li>Mỗi người nhận một mức quà cao nhất.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="stats reveal" id="eventStats"></div>
+
+        <div class="event-block">
+          <div class="sub-head">
+            <h3>Fanart</h3>
+            <span>Chạm vào tranh để xem lớn</span>
+          </div>
+          <div class="gallery" id="gallery"></div>
+        </div>
+
+        <div class="event-block">
+          <div class="sub-head">
+            <h3>Người xem thường xuyên</h3>
+            <span>Những cái tên luôn có mặt khi thư viện mở cửa</span>
+          </div>
+          <ul class="regulars" id="regulars"></ul>
+        </div>
+      </div>
+    </section>
 
     <!-- ═══════════ WISH LANTERN ═══════════ -->
     <section class="block" id="uoc-nguyen">
@@ -748,6 +996,17 @@
 
   <button class="sky-toggle" id="skyToggle" aria-label="Tắt/bật hiệu ứng đèn trời" title="Tắt/bật hiệu ứng">🏮</button>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem fanart" hidden>
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Đóng">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Tranh trước">‹</button>
+    <figure class="lb-figure">
+      <img id="lbImg" alt="">
+      <figcaption class="lb-caption" id="lbCap"></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Tranh sau">›</button>
+  </div>
+
+  <script src="trung-thu-data.js"></script>
   <script>
   (() => {
     'use strict';
@@ -1058,6 +1317,138 @@
         btn.setAttribute('aria-pressed', String(f));
       });
       riddleGrid.appendChild(btn);
+    });
+
+    /* ─── Fanart event ─── */
+    const EVENT = window.TRUNG_THU_EVENT || {};
+    const fanarts = (Array.isArray(EVENT.fanarts) ? EVENT.fanarts : []).filter(a => a && a.anh && a.tacGia);
+    const regulars = (Array.isArray(EVENT.regulars) ? EVENT.regulars : [])
+      .map(r => typeof r === 'string' ? { ten: r } : r)
+      .filter(r => r && r.ten);
+    const money = n => new Intl.NumberFormat('vi-VN').format(n) + 'đ';
+    const safeUrl = u => (typeof u === 'string' && /^https?:\/\//i.test(u)) ? u : '';
+    const el = (tag, cls, text) => {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (text != null) e.textContent = text;
+      return e;
+    };
+    const giftBadge = (amount, sent) => {
+      const b = el('span', 'gift' + (sent ? ' sent' : ''), (sent ? '✓ Đã gửi ' : '🎁 ') + money(amount));
+      b.title = sent ? 'Đã gửi quà' : 'Quà đang chờ gửi';
+      return b;
+    };
+
+    document.querySelectorAll('[data-field]').forEach(n => {
+      const v = EVENT[n.dataset.field];
+      if (v) n.textContent = v;
+    });
+
+    fanarts.forEach(a => { a.qua = Number(a.qua) || 50000; });
+    regulars.forEach(r => { r.qua = Number(r.qua) || 20000; });
+    const total = [...fanarts, ...regulars].reduce((s, x) => s + x.qua, 0);
+    const sentCount = [...fanarts, ...regulars].filter(x => x.daGui).length;
+    const people = fanarts.length + regulars.length;
+
+    const statsEl = document.getElementById('eventStats');
+    [
+      [fanarts.length, 'Tác phẩm'],
+      [regulars.length, 'Người xem thường xuyên'],
+      [money(total), 'Tổng quà'],
+      [people ? `${sentCount}/${people}` : '0', 'Đã gửi quà']
+    ].forEach(([n, l]) => {
+      const c = el('div', 'stat card');
+      c.append(el('div', 'stat-num', n), el('div', 'stat-label', l));
+      statsEl.appendChild(c);
+    });
+
+    const galleryEl = document.getElementById('gallery');
+    if (!fanarts.length) {
+      galleryEl.style.columns = 'auto';
+      const e = el('div', 'empty card');
+      e.append(el('strong', null, 'Kệ tranh đang được sắp xếp…'), 'Các bức tranh sẽ được treo lên sau stream Trung Thu. Quay lại sớm nhé.');
+      galleryEl.appendChild(e);
+    }
+    fanarts.forEach((a, i) => {
+      const card = el('button', 'art card');
+      card.type = 'button';
+      const img = el('img');
+      img.src = a.anh;
+      img.alt = (a.tieuDe ? a.tieuDe + ' — ' : '') + 'fanart của ' + a.tacGia;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      const meta = el('div', 'art-meta');
+      const who = el('div', 'art-who');
+      who.appendChild(el('div', 'art-name', a.tacGia));
+      if (a.kenh) who.appendChild(el('div', 'art-channel', a.kenh));
+      meta.append(who, giftBadge(a.qua, a.daGui));
+      card.append(img, meta);
+      card.addEventListener('click', () => openLightbox(i));
+      galleryEl.appendChild(card);
+    });
+
+    const regEl = document.getElementById('regulars');
+    if (!regulars.length) {
+      const li = el('li', 'empty card');
+      li.style.gridColumn = '1 / -1';
+      li.append(el('strong', null, 'Danh sách đang được ghi lại…'), 'Tên các bạn sẽ xuất hiện ở đây sau khi Zi tổng hợp comment.');
+      regEl.appendChild(li);
+    }
+    regulars.forEach(r => {
+      const li = el('li', 'regular card');
+      li.append(el('span', 'regular-name', r.ten), giftBadge(r.qua, r.daGui));
+      regEl.appendChild(li);
+    });
+
+    /* Lightbox */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    let lbIndex = 0, lbReturn = null;
+
+    function showArt(i) {
+      lbIndex = (i + fanarts.length) % fanarts.length;
+      const a = fanarts[lbIndex];
+      lbImg.src = a.anh;
+      lbImg.alt = 'fanart của ' + a.tacGia;
+      lbCap.replaceChildren();
+      const line = el('div', 'art-name', (a.tieuDe ? a.tieuDe + ' · ' : '') + a.tacGia);
+      lbCap.appendChild(line);
+      const sub = el('div', 'art-channel');
+      if (a.kenh) sub.append(a.kenh);
+      const url = safeUrl(a.link);
+      if (url) {
+        if (a.kenh) sub.append(' · ');
+        const link = el('a', null, 'Xem bài gốc ↗');
+        link.href = url; link.target = '_blank'; link.rel = 'noopener';
+        sub.appendChild(link);
+      }
+      if (sub.childNodes.length) lbCap.appendChild(sub);
+      const multi = fanarts.length > 1;
+      document.getElementById('lbPrev').hidden = !multi;
+      document.getElementById('lbNext').hidden = !multi;
+    }
+    function openLightbox(i) {
+      lbReturn = document.activeElement;
+      showArt(i);
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lbClose').focus();
+    }
+    function closeLightbox() {
+      lb.hidden = true;
+      document.body.style.overflow = '';
+      if (lbReturn) lbReturn.focus();
+    }
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev').addEventListener('click', () => showArt(lbIndex - 1));
+    document.getElementById('lbNext').addEventListener('click', () => showArt(lbIndex + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') showArt(lbIndex - 1);
+      else if (e.key === 'ArrowRight') showArt(lbIndex + 1);
     });
 
     /* ─── Scroll reveal ─── */
