@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starting Soon — Zi Eer</title>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="overlay.css">
+</head>
+<body>
+  <div id="stage">
+    <div class="wall-panels"></div>
+    <div class="wall-noise"></div>
+    <div class="backlight"></div>
+    <div class="bokeh-layer"></div>
+
+    <div class="poster poster-left">
+      <div class="p-kicker">EST. RECORD 01</div>
+      <div class="p-title">CHRONO<br>ARCHIVE</div>
+      <div class="clock"><i class="hand h"></i><i class="hand m"></i><i class="pin"></i></div>
+      <div class="p-foot">TIME KEEPS ROLLING</div>
+    </div>
+    <div class="poster poster-right">
+      <div class="p-kicker">NOW PLAYING</div>
+      <div class="p-big" data-name></div>
+      <div class="p-stripes"></div>
+      <div class="p-foot">@ZIERUNE</div>
+    </div>
+
+    <div class="shelf shelf-l"></div>
+    <div class="shelf shelf-r"></div>
+
+    <div class="speaker speaker-l"><i class="cone small"></i><i class="cone big"></i></div>
+    <div class="speaker speaker-r"><i class="cone small"></i><i class="cone big"></i></div>
+
+    <div class="desk"></div>
+    <div class="desk-tapes">
+      <div class="vhs" data-l="RECORD 07"></div>
+      <div class="vhs" data-l="TALK SHOW"></div>
+      <div class="vhs" data-l="GAME NIGHT"></div>
+    </div>
+
+    <div class="tv">
+      <div class="tv-top">
+        <div class="box" data-l="ARCHIVE VOL.2"></div>
+        <div class="box" data-l="ARCHIVE VOL.1"></div>
+      </div>
+      <div class="tv-bezel">
+        <div class="screen">
+          <div class="screen-inner">
+            <div class="grid-flat"></div>
+            <div class="laser a"></div>
+            <div class="laser b"></div>
+            <div class="horizon"></div>
+            <div class="grid-floor-wrap"><div class="grid-floor"></div></div>
+
+            <div class="hud tl" data-name></div>
+            <div class="hud tr"><span class="rec-dot"></span>REC</div>
+            <div class="hud bl"></div>
+            <div class="hud br"></div>
+
+            <div class="content">
+              <div class="title"></div>
+              <div class="prompt"><span class="caret">&#9656;</span><span class="label"></span></div>
+              <div class="caption"><span class="text"></span><span class="dots"></span></div>
+              <div class="countdown"></div>
+            </div>
+          </div>
+          <div class="scanlines"></div>
+          <div class="roll"></div>
+          <div class="flicker"></div>
+          <div class="curve"></div>
+          <div class="glare"></div>
+        </div>
+      </div>
+      <div class="tv-panel">
+        <div class="tv-brand"><b>ZI</b>-TRON 1999</div>
+        <div class="tv-grille"></div>
+        <div class="power-led"></div>
+        <div class="knob"></div>
+        <div class="knob k2"></div>
+      </div>
+      <div class="tv-feet"><i></i><i></i></div>
+    </div>
+
+    <div class="vcr">
+      <div class="vcr-slot"><div class="vcr-tape"><div class="label"></div></div></div>
+      <div class="vcr-display"><span class="sym">&#9654;</span><span class="time"></span></div>
+      <div class="vcr-btns"><i class="on"></i><i></i><i></i></div>
+    </div>
+
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+
+  <script>
+    window.SCENE = {
+      lines: [['STARTING', 112], ['SOON', 136]],
+      prompt: 'PRESS START',
+      caption: 'LOADING THE ARCHIVE',
+      tape: 'stay tuned!',
+      hud: 'CH 01',
+      countdown: true
+    };
+  </script>
+  <script src="overlay.js"></script>
+</body>
+</html>
