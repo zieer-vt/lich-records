@@ -795,23 +795,23 @@
 /* ══════════════════════════════════════════════════
    CẬP NHẬT MỖI TUẦN
 ══════════════════════════════════════════════════ */
-const WEEK_OF = "28/9 — 4/10";
+const WEEK_OF = "5/10 — 11/10";
 
 const WEEK_SCHEDULE = [
-  { day:"T.2", date:"28/9", status:"stream",  activity:"Japanese Ramen Simulator", time:"20:00", note:"" },
-  { day:"T.3", date:"29/9", status:"off",     activity:"",                         time:"",      note:"" },
-  { day:"T.4", date:"30/9", status:"off",     activity:"",                         time:"",      note:"" },
-  { day:"T.5", date:"1/10", status:"stream",  activity:"Scam Line",                time:"20:00", note:"" },
-  { day:"T.6", date:"2/10", status:"off",     activity:"",                         time:"",      note:"" },
-  { day:"T.7", date:"3/10", status:"off",     activity:"",                         time:"",      note:"" },
-  { day:"CN",  date:"4/10", status:"stream",  activity:"Dread Flats",              time:"20:00", note:"" },
+  { day:"T.2", date:"5/10",  status:"stream",  activity:"RV There Yet?",            time:"20:00", note:"" },
+  { day:"T.3", date:"6/10",  status:"off",     activity:"",                         time:"",      note:"" },
+  { day:"T.4", date:"7/10",  status:"off",     activity:"",                         time:"",      note:"" },
+  { day:"T.5", date:"8/10",  status:"off",     activity:"",                         time:"",      note:"" },
+  { day:"T.6", date:"9/10",  status:"stream",  activity:"Aniimo",                   time:"20:00", note:"" },
+  { day:"T.7", date:"10/10", status:"off",     activity:"",                         time:"",      note:"" },
+  { day:"CN",  date:"11/10", status:"stream",  activity:"Gamble With Your Friends",  time:"20:00", note:"" },
 ];
 
 const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
-  id: 14,
-  date: `thứ Hai, 28/9`,
-  desc: `Tuần này 3 stream —<br>thứ Hai Japanese Ramen Simulator,<br>thứ Năm Scam Line,<br>Chủ nhật Dread Flats.`,
+  id: 15,
+  date: `thứ Hai, 5/10`,
+  desc: `Tuần này 3 stream —<br>thứ Hai RV There Yet?,<br>thứ Sáu Aniimo,<br>Chủ nhật Gamble With Your Friends.`,
 } : null;
 
 /* ════════════════════════
