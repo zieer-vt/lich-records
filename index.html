@@ -795,23 +795,23 @@
 /* ══════════════════════════════════════════════════
    CẬP NHẬT MỖI TUẦN
 ══════════════════════════════════════════════════ */
-const WEEK_OF = "12/10 — 18/10";
+const WEEK_OF = "19/10 — 25/10";
 
 const WEEK_SCHEDULE = [
-  { day:"T.2", date:"12/10", status:"stream",  activity:"Content Warning", time:"20:00", note:"" },
-  { day:"T.3", date:"13/10", status:"stream",  activity:"Talk Show",       time:"20:00", note:"" },
-  { day:"T.4", date:"14/10", status:"stream",  activity:"BOMBANANA!",      time:"20:00", note:"" },
-  { day:"T.5", date:"15/10", status:"stream",  activity:"Dread Neighbor",  time:"20:00", note:"" },
-  { day:"T.6", date:"16/10", status:"stream",  activity:"Ad Infinitum",    time:"20:00", note:"" },
-  { day:"T.7", date:"17/10", status:"stream",  activity:"Subliminal",      time:"20:00", note:"" },
-  { day:"CN",  date:"18/10", status:"stream",  activity:"Twisted Party",   time:"20:00", note:"" },
+  { day:"T.2", date:"19/10", status:"off",     activity:"",             time:"",      note:"" },
+  { day:"T.3", date:"20/10", status:"stream",  activity:"Talk Show",    time:"20:00", note:"" },
+  { day:"T.4", date:"21/10", status:"off",     activity:"",             time:"",      note:"" },
+  { day:"T.5", date:"22/10", status:"off",     activity:"",             time:"",      note:"" },
+  { day:"T.6", date:"23/10", status:"stream",  activity:"Ad Infinitum", time:"20:00", note:"" },
+  { day:"T.7", date:"24/10", status:"off",     activity:"",             time:"",      note:"" },
+  { day:"CN",  date:"25/10", status:"off",     activity:"",             time:"",      note:"" },
 ];
 
 const streamDay = WEEK_SCHEDULE.find(d => d.status === "stream");
 const featured  = streamDay ? {
-  id: 16,
-  date: `thứ Hai, 12/10`,
-  desc: `Tuần này 7 stream —<br>mỗi ngày một chương.`,
+  id: 17,
+  date: `thứ Ba, 20/10`,
+  desc: `Tuần này 2 stream —<br>thứ Ba Talk Show,<br>thứ Sáu Ad Infinitum.`,
 } : null;
 
 /* ════════════════════════
